@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'fr.aura.markandweb'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.9.2'
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compileOnly('jakarta.platform:jakarta.jakartaee-web-api:10.0.0')
+    compileOnly('jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api:3.0.2')
+    compileOnly('jakarta.jms:jakarta.jms-api:3.1.0')
+    compileOnly('jakarta.mvc:jakarta.mvc-api:2.1.0')
+    compileOnly('jakarta.xml.ws:jakarta.xml.ws-api:4.0.0')
+    // https://mvnrepository.com/artifact/jakarta.xml.soap/jakarta.xml.soap-api
+    implementation("jakarta.xml.soap:jakarta.xml.soap-api:3.0.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}

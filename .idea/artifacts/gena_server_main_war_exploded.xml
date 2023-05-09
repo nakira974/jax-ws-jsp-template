@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="gena_server.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/gena_server_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="gena_server.main" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="gena_server.main/web/Web Gradle : gena_server-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>
