@@ -14,8 +14,8 @@ ext {
     junitVersion = '5.9.2'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -28,17 +28,27 @@ configurations {
 }
 dependencies {
 
+    implementation 'org.jetbrains:annotations:24.0.0'
     compileOnly('jakarta.platform:jakarta.jakartaee-web-api:10.0.0')
     compileOnly('jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api:3.0.2')
     compileOnly('jakarta.jms:jakarta.jms-api:3.1.0')
     compileOnly('jakarta.mvc:jakarta.mvc-api:2.1.0')
 
+    //DI Container
+    implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
     //SOAP IMPLEMENTATIONS
     implementation('jakarta.xml.ws:jakarta.xml.ws-api:4.0.0')
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
     implementation("jakarta.xml.soap:jakarta.xml.soap-api:3.0.0")
     implementation("com.sun.xml.messaging.saaj:saaj-impl:3.0.1")
+
+    //Jakarta EE Annotations
+    implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api:2.1.1")
+
+    //Tomcat Implementations
+    compileOnly("org.apache.tomee:javaee-api:8.0-6")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

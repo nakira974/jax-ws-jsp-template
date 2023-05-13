@@ -1,4 +1,4 @@
-package fr.aura.markandweb.gena_server.servlets.services.soap;
+package fr.aura.markandweb.gena_server.servlets.soap;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

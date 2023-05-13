@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/">
+    <!-- Resource reference to Web Service Context -->
+    <Resource name="ws-context" auth="Container"
+              type="jakarta.xml.ws.WebServiceContext"/>
+
 </Context>

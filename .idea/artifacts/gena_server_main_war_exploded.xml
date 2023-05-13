@@ -1,10 +1,26 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="gena_server.main:war exploded">
+  <artifact type="exploded-war" name="gena_server.main:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/gena_server_main_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="gena_server.main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:4.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.0" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.messaging.saaj:saaj-impl:3.0.1" />
+          <element id="library" level="project" name="Gradle: org.jvnet.staxex:stax-ex:2.1.0" />
+          <element id="library" level="project" name="Gradle: org.eclipse.angus:angus-activation:1.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.interceptor:jakarta.interceptor-api:2.1.0" />
+          <element id="library" level="project" name="Gradle: jakarta.enterprise:jakarta.enterprise.lang-model:4.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:5.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.annotation:jakarta.annotation-api:2.1.1" />
+          <element id="library" level="project" name="Gradle: org.jetbrains:annotations:24.0.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="gena_server.main/web/Web Gradle : gena_server-1.0-SNAPSHOT.war" />
