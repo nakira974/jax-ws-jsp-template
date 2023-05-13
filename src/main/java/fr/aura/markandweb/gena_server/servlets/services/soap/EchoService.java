@@ -5,13 +5,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.soap.*;
-
-import javax.xml.namespace.QName;
 import jakarta.xml.ws.Provider;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.ServiceMode;
 import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
+
+import javax.xml.namespace.QName;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/EchoService"})
