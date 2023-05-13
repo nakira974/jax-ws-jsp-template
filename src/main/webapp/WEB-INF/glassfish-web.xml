@@ -5,6 +5,11 @@
     <!--DEPENDENCY INJECTION RESOURCES-->
     <resource-ref>
         <res-ref-name>ws-context</res-ref-name>
-        <jndi-name>jakarta.xml.ws.WebServiceContext</jndi-name>
+        <jndi-name>java:comp/jaxws-context</jndi-name>
     </resource-ref>
+
+    <!--CONFIGURE JAX-WS-->
+    <class-loader delegate="false"/>
+    <property name="useSunHttpHandler" value="true"/>
 </glassfish-web-app>
+

@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import fr.aura.markandweb.gena_server.servlets.soap.EchoService;
-import jakarta.annotation.Resource;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -14,7 +14,6 @@ import jakarta.xml.soap.*;
 import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
 import org.jetbrains.annotations.NotNull;
-import javax.annotation.PostConstruct;
 
 import javax.xml.namespace.QName;
 
@@ -32,7 +31,6 @@ public class HelloServlet extends HttpServlet {
     }
 
 
-    @PostConstruct
     public void doGet(@NotNull  HttpServletRequest request, @NotNull HttpServletResponse response) throws IOException {
         EchoService echoService = new EchoService();
         PrintWriter out = response.getWriter();
@@ -50,14 +48,19 @@ public class HelloServlet extends HttpServlet {
             // Set the SOAP message in the request message context
             try {
                 MessageContext messageContext = wsContext.getMessageContext();
-                messageContext.put(MessageContext.MESSAGE_OUTBOUND_PROPERTY, soapRequest);
+                if (messageContext != null) {
+                    messageContext.put(MessageContext.MESSAGE_OUTBOUND_PROPERTY, soapRequest);
+                } else {
+                    System.err.println("MessageContext is null.");
+                    return;
+                }
             }catch (IllegalStateException ex){
                 System.err.println(ex.getMessage());
                 return;
             }
 
             // Make an HTTP POST request to invoke the service
-            URL url = new URL("http://localhost:8083/EchoService");
+            URL url = new URL("http://localhost:8080/EchoService");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "text/xml;charset=utf-8");
@@ -79,7 +82,6 @@ public class HelloServlet extends HttpServlet {
         out.println("</body></html>");
     }
 
-    @PostConstruct
     protected void doPost(@NotNull HttpServletRequest request,@NotNull HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getMethod();
