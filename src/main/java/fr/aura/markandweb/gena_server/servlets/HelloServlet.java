@@ -1,31 +1,22 @@
 package fr.aura.markandweb.gena_server.servlets;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import fr.aura.markandweb.gena_server.servlets.soap.EchoService;
-import jakarta.annotation.PostConstruct;
-import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import jakarta.xml.soap.*;
-import jakarta.xml.ws.WebServiceContext;
-import jakarta.xml.ws.handler.MessageContext;
+
+import jakarta.xml.ws.Service;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-    private final WebServiceContext wsContext;
     private String title;
-
-    @Inject
-    public HelloServlet(WebServiceContext ctx){
-        wsContext = ctx;
-    }
     public void init() {
         title = "Hello World!";
     }
@@ -38,43 +29,22 @@ public class HelloServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" + title + "</h1>");
         try {
-            // Create a new SOAP message with the echoRequest element
-            SOAPMessage soapRequest = MessageFactory.newInstance().createMessage();
-            SOAPEnvelope envelope = soapRequest.getSOAPPart().getEnvelope();
-            SOAPBody body = envelope.getBody();
-            SOAPElement echoRequest = body.addChildElement(new QName(EchoService.getNamespaceUri(), "echoRequest"));
-            echoRequest.addTextNode("Test string");
+            // Create a URL object pointing to the WSDL of the Webservice
+            URL wsdlUrl = new URL("http://localhost:8080/EchoService?wsdl");
 
-            // Set the SOAP message in the request message context
-            try {
-                MessageContext messageContext = wsContext.getMessageContext();
-                if (messageContext != null) {
-                    messageContext.put(MessageContext.MESSAGE_OUTBOUND_PROPERTY, soapRequest);
-                } else {
-                    System.err.println("MessageContext is null.");
-                    return;
-                }
-            }catch (IllegalStateException ex){
-                System.err.println(ex.getMessage());
-                return;
-            }
+            // Create a QName object representing the name of the Webservice
+            QName serviceName = new QName("http://localhost:8083/echo", "EchoService");
 
-            // Make an HTTP POST request to invoke the service
-            URL url = new URL("http://localhost:8080/EchoService");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "text/xml;charset=utf-8");
+            // Create a Service object using the Service.create() method
+            Service service = Service.create(wsdlUrl, serviceName);
 
-            // Read the response message from the connection input stream
-            InputStream inputStream = connection.getInputStream();
-            SOAPMessage soapResponse = MessageFactory.newInstance().createMessage(null, inputStream);
 
-            // Extract the response content and print it
-            String responseContent = soapResponse.getSOAPBody().getChildNodes().item(0).getTextContent();
-            out.println("<p>Response from EchoService: " + responseContent+"</p>");
-        } catch (SOAPException ex) {
-            System.err.println(ex.getMessage());
-            return;
+            // Process the SOAP response
+            System.out.println(response);
+
+        } catch (Exception e) {
+            // Handle exception
+            System.err.println(e.getMessage());
         }
 
 

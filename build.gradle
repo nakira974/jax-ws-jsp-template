@@ -1,7 +1,9 @@
 plugins {
     id 'java'
     id 'war'
+    id 'idea'
 }
+
 
 group 'fr.aura.markandweb'
 version '1.0-SNAPSHOT'
@@ -21,6 +23,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+
 configurations {
     configureEach {
         exclude group: 'xml-apis', module: 'xml-apis'
@@ -33,20 +36,38 @@ dependencies {
     compileOnly('jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api:3.0.2')
     compileOnly('jakarta.jms:jakarta.jms-api:3.1.0')
     compileOnly('jakarta.mvc:jakarta.mvc-api:2.1.0')
+    compileOnly("jakarta.platform:jakarta.jakartaee-api:10.0.0")
+
 
     //DI Container
     implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
     //SOAP IMPLEMENTATIONS
-    implementation('jakarta.xml.ws:jakarta.xml.ws-api:4.0.0')
-    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+    implementation("jakarta.activation:jakarta.activation-api:2.1.2")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+    implementation("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
     implementation("jakarta.xml.soap:jakarta.xml.soap-api:3.0.0")
+    implementation("javax.activation:activation:1.1.1")
+    implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("com.sun.xml.bind:jaxb-core:2.3.0")
+    implementation("com.sun.xml.bind:jaxb-impl:2.3.0")
+    implementation("com.sun.xml.ws:rt:2.3.3")
     implementation("com.sun.xml.messaging.saaj:saaj-impl:3.0.1")
     implementation("com.sun.xml.ws:jaxws-rt:4.0.1")
+    implementation("com.sun.xml.ws:jaxws-tools:4.0.1")
+
+
+
 
     //Jakarta EE Annotations
+    compileOnly("jakarta.servlet:jakarta.servlet-api:6.0.0")
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api:2.1.1")
+
+    //Tomcat Implementations
+    compileOnly("org.apache.tomcat:tomcat-catalina:11.0.0-M5")
+    implementation("org.apache.tomcat:tomcat-websocket:11.0.0-M5")
+    implementation("org.apache.openwebbeans:openwebbeans-web:2.0.22")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -54,4 +75,37 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+configurations {
+    jaxws
+}
+
+dependencies {
+    jaxws 'com.sun.xml.ws:jaxws-tools:4.0.1'
+}
+
+task wsimport {
+    ext.destDir = file("${projectDir}/src/main/generated")
+    doLast {
+        ant {
+            sourceSets.main.output.classesDirs.inits()
+            destDir.mkdirs()
+            taskdef(name: 'wsimport',
+                    classname: 'com.sun.tools.ws.ant.WsImport',
+                    classpath: configurations.jaxws.asPath
+            )
+            wsimport(keep: true,
+                    sourcedestdir: 'src/main/java',
+                    package: "fr.aura.merkandweb.gena_server",
+                    wsdl: "${projectDir}/src/main/resources/echo.wsdl") {
+                xjcarg(value: "-XautoNameResolution")
+            }
+        }
+    }
+}
+
+compileJava {
+    dependsOn wsimport
+    source wsimport.destDir
 }

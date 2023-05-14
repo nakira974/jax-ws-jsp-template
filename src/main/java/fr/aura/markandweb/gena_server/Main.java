@@ -1,3 +1,5 @@
+package fr.aura.markandweb.gena_server;
+
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 

@@ -10,22 +10,24 @@ import jakarta.xml.ws.Service;
 import jakarta.xml.ws.ServiceMode;
 import jakarta.xml.ws.WebServiceContext;
 import jakarta.xml.ws.handler.MessageContext;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/EchoService"})
+@WebServlet(name = "echoService", urlPatterns = {"/EchoService"})
 @ServiceMode(value = Service.Mode.MESSAGE)
 public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
     // The namespace URI and local part used in the SOAP message
-    private static final String NAMESPACE_URI = "http://example.org/echo";
-    private static final String LOCAL_PART = "echoRequest";
+    private static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
+    private static final @NotNull String LOCAL_PART = "echoRequest";
 
     /**
      *
      * @return Service's namespace
      */
-    public static String getNamespaceUri(){
+    public static @NotNull String getNamespaceUri(){
         return NAMESPACE_URI;
     }
 
@@ -37,7 +39,8 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
      * @return A new SOAP message with the same content as the response
      */
     @Override
-    public SOAPMessage invoke(SOAPMessage request) {
+    @Contract("_ -> new")
+    public SOAPMessage invoke(@NotNull SOAPMessage request) {
         try {
             // Get the SOAP envelope and body from the incoming message
             SOAPEnvelope envelope = request.getSOAPPart().getEnvelope();
@@ -72,7 +75,7 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
      * @param resp The HTTP response
      */
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(@NotNull HttpServletRequest req, @NotNull  HttpServletResponse resp) throws IOException {
         // Get the WebServiceContext and MessageContext
         WebServiceContext wsContext = (WebServiceContext) req.getAttribute(WebServiceContext.class.getName());
         MessageContext msgContext = wsContext.getMessageContext();

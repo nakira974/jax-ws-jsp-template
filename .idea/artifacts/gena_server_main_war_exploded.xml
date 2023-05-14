@@ -21,6 +21,46 @@
           <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:5.0.0" />
           <element id="library" level="project" name="Gradle: jakarta.annotation:jakarta.annotation-api:2.1.1" />
           <element id="library" level="project" name="Gradle: org.jetbrains:annotations:24.0.0" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.ws:rt:2.3.3" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.ws:jaxws-rt:4.0.1" />
+          <element id="library" level="project" name="Gradle: javax.activation:activation:1.1.1" />
+          <element id="library" level="project" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.2" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-websocket:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: org.apache.openwebbeans:openwebbeans-web:2.0.22" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-servlet-api:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-util:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.bind:jaxb-impl:4.0.2" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.stream.buffer:streambuffer:2.1.0" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.ws:policy:2.7.10" />
+          <element id="library" level="project" name="Gradle: org.glassfish.ha:ha-api:3.1.13" />
+          <element id="library" level="project" name="Gradle: org.glassfish.external:management-api:3.2.3" />
+          <element id="library" level="project" name="Gradle: org.glassfish.gmbal:gmbal:4.0.1" />
+          <element id="library" level="project" name="Gradle: org.glassfish.pfl:pfl-tf:4.1.0" />
+          <element id="library" level="project" name="Gradle: org.glassfish.pfl:pfl-basic:4.1.0" />
+          <element id="library" level="project" name="Gradle: org.jvnet.mimepull:mimepull:1.10.0" />
+          <element id="library" level="project" name="Gradle: jakarta.jws:jakarta.jws-api:2.1.0" />
+          <element id="library" level="project" name="Gradle: jakarta.mail:jakarta.mail-api:2.1.1" />
+          <element id="library" level="project" name="Gradle: org.glassfish.gmbal:gmbal-api-only:4.0.3" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.fastinfoset:FastInfoset:2.1.0" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-websocket-api:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: org.apache.openwebbeans:openwebbeans-impl:2.0.22" />
+          <element id="library" level="project" name="Gradle: org.apache.xbean:xbean-finder-shaded:4.18" />
+          <element id="library" level="project" name="Gradle: org.apache.openwebbeans:openwebbeans-el22:2.0.22" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.bind:jaxb-core:4.0.2" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-websocket-client-api:11.0.0-M5" />
+          <element id="library" level="project" name="Gradle: org.apache.xbean:xbean-asm9-shaded:4.18" />
+          <element id="library" level="project" name="Gradle: org.apache.openwebbeans:openwebbeans-spi:2.0.22" />
+          <element id="library" level="project" name="Gradle: org.ow2.asm:asm-commons:9.0-beta" />
+          <element id="library" level="project" name="Gradle: org.ow2.asm:asm:9.0-beta" />
+          <element id="library" level="project" name="Gradle: org.apache.xbean:xbean-asm-util:4.18" />
+          <element id="library" level="project" name="Gradle: org.ow2.asm:asm-analysis:9.0-beta" />
+          <element id="library" level="project" name="Gradle: org.ow2.asm:asm-tree:9.0-beta" />
+          <element id="library" level="project" name="Gradle: com.sun.activation:jakarta.activation:1.2.2" />
+          <element id="library" level="project" name="Gradle: com.fasterxml.woodstox:woodstox-core:6.5.0" />
+          <element id="library" level="project" name="Gradle: org.codehaus.woodstox:stax2-api:4.2.1" />
+          <element id="library" level="project" name="Gradle: org.eclipse.angus:angus-mail:2.0.1" />
+          <element id="library" level="project" name="Gradle: org.eclipse.angus:angus-activation:2.0.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="gena_server.main/web/Web Gradle : gena_server-1.0-SNAPSHOT.war" />

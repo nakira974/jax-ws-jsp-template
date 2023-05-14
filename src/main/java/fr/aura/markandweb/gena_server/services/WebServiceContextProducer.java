@@ -1,22 +1,19 @@
 package fr.aura.markandweb.gena_server.services;
-
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.xml.ws.WebServiceContext;
+import jakarta.xml.ws.handler.MessageContext;
 
-import javax.naming.NamingException;
-
-
-@ApplicationScoped
-public class WebServiceContextProducer {
-
-    @Resource(lookup = "java:comp/env/ws-context")
-    WebServiceContext webServiceContext;
+public abstract class WebServiceContextProducer {
+    @Resource(name = "ws-context")
+    private WebServiceContext ctx;
 
     @Produces
-    public WebServiceContext createWebServiceContext() throws NamingException {
-        return this.webServiceContext;
+    @ApplicationScoped
+    public WebServiceContext getWebServiceContext() {
+        return ctx;
     }
-}
 
+    public abstract WebServiceContext createWebServiceContext(MessageContext msgContext);
+}
