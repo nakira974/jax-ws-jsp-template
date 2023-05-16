@@ -1,51 +1,73 @@
 package fr.aura.markandweb.gena_server.servlets;
 
 import java.io.*;
+import java.net.URL;
 
-import fr.aura.markandweb.gena_server.servlets.services.soap.EchoService;
+import fr.aura.merkandweb.gena_server.controllers.xml.EchoService;
+import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import jakarta.xml.soap.*;
+
+import jakarta.xml.ws.Service;
+
+import jakarta.xml.ws.WebServiceException;
+import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-    private String message;
-
+    private String title;
     public void init() {
-        message = "Hello World!";
+        title = "Hello World!";
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        EchoService echoService = new EchoService();
-        try {
-            // Create a sample SOAP message with a test string as the message content
-            SOAPMessage msg = MessageFactory.newInstance().createMessage();
-            SOAPBody body = msg.getSOAPPart().getEnvelope().getBody();
-            SOAPElement echoRequest = body.addChildElement(new QName(EchoService.getNamespaceUri(), "echoRequest"));
-            echoRequest.addTextNode("Test string");
 
-            // Invoke the EchoService with the sample SOAP message
-            SOAPMessage soapMessage = echoService.invoke(msg);
-
-            // Extract the response content and print it
-            String responseContent = soapMessage.getSOAPBody().getChildNodes().item(0).getTextContent();
-            System.out.println("<p>Response from EchoService: " + responseContent + "</p>");
-        } catch (SOAPException e) {
-            e.printStackTrace();
-        }
+    public void doGet(@NotNull  HttpServletRequest request, @NotNull HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html");
+        out.println("<html><body>");
+        out.println("<h1>" + title + "</h1>");
+        try {
+            // Create a URL object pointing to the WSDL of the Webservice
+            URL wsdlUrl = new URL("http://localhost:8083/EchoService?wsdl");
+
+            // Create a QName object representing the name of the Webservice
+            QName serviceName = new QName("http://localhost:8083/echo", "echoRequest");
+
+            // Create a Service object using the Service.create() method
+            final EchoService service;
+            try{
+                service   = (EchoService) Service.create(wsdlUrl, serviceName);
+
+            }catch (WebServiceException ex){
+                System.err.println(ex.getMessage());
+                return;
+            }
+
+            // Get the EchoPortType from the Service
+            EchoServicePortType echoPort = service.getPort(EchoServicePortType.class);
+
+            // Call the echo() method on the EchoPortType
+            String echoedString = echoPort.echo("Hello World!");
+
+            // Print the result
+            out.println("<p>Result: " + echoedString + "</p>");
+            // Process the SOAP response
+            System.out.println(response);
+
+        } catch (Exception e) {
+            // Handle exception
+            System.err.println(e.getMessage());
+        }
+
 
         // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(@NotNull HttpServletRequest request,@NotNull HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getMethod();
         if (method.equalsIgnoreCase("PATCH")) {
