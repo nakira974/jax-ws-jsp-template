@@ -32,7 +32,7 @@ public class HelloServlet extends HttpServlet {
         out.println("<h1>" + title + "</h1>");
         try {
             // Create a URL object pointing to the WSDL of the Webservice
-            URL wsdlUrl = new URL("http://localhost:8083/EchoService?wsdl");
+            URL wsdlUrl = new URL("http://localhost:8083/echo?wsdl");
 
             // Create a QName object representing the name of the Webservice
             QName serviceName = new QName("http://localhost:8083/echo", "EchoService");

@@ -1,6 +1,10 @@
 package fr.aura.markandweb.gena_server.servlets.soap;
 
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,9 +19,13 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
+import java.io.*;
+import java.util.stream.Collectors;
 
-@WebServlet(name = "echoService", urlPatterns = {"/EchoService"})
+/**
+ * This is a Tst WS, i'd like to demonstrate how cool and simple is a low level approach
+ * to create performing asynchronous xml WS*/
+@WebServlet(name = "echoService", urlPatterns = {"/echo"})
 @ServiceMode(value = Service.Mode.MESSAGE)
 public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
     // The namespace URI and local part used in the SOAP message
@@ -68,6 +76,11 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
         return null;
     }
 
+    @WebMethod(operationName = "echo")
+    public @WebResult(name = "echoResponse") String echo(@WebParam(name = "echoRequest") String message) {
+        return message;
+    }
+
     /**
      * Handles the HTTP POST request, extracts the SOAP message from the request,
      * invokes the SOAP service by calling the 'invoke' method, and writes the
@@ -78,28 +91,54 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
     @Override
     public void doPost(@NotNull HttpServletRequest req, @NotNull  HttpServletResponse resp) throws IOException {
         // Get the WebServiceContext and MessageContext
-        WebServiceContext wsContext = (WebServiceContext) req.getAttribute(WebServiceContext.class.getName());
-        MessageContext msgContext = wsContext.getMessageContext();
+        try{
+            WebServiceContext wsContext = (WebServiceContext) req.getAttribute(WebServiceContext.class.getName());
+            MessageContext msgContext = wsContext.getMessageContext();
 
-        // Extract the SOAP message from the request
-        SOAPMessage request = (SOAPMessage) msgContext.get(MessageContext.SERVLET_REQUEST);
+            // Extract the SOAP message from the request
+            SOAPMessage request = (SOAPMessage) msgContext.get(MessageContext.SERVLET_REQUEST);
 
-        // Invoke the SOAP service and get the resulting SOAP message
-        SOAPMessage response = invoke(request);
+            // Invoke the SOAP service and get the resulting SOAP message
+            SOAPMessage response = invoke(request);
 
-        if (response != null) {
-            try {
-                // Set the response HTTP status and content type headers
-                resp.setStatus(HttpServletResponse.SC_OK);
-                resp.setContentType("text/xml;charset=utf-8");
+            if (response != null) {
+                try {
+                    // Set the response HTTP status and content type headers
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    resp.setContentType("text/xml;charset=utf-8");
 
-                // Write the SOAP message to the response output stream
-                response.writeTo(resp.getOutputStream());
-            } catch (SOAPException e) {
-                throw new RuntimeException(e);
+                    // Write the SOAP message to the response output stream
+                    response.writeTo(resp.getOutputStream());
+                } catch (SOAPException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-        } else {
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
         }
+
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/xml");
+        PrintWriter out = response.getWriter();
+
+        // Load the WSDL definition from a file in the resources folder
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("echo.wsdl");
+        if (inputStream == null) {
+            throw new RuntimeException("WSDL not found");
+        }
+
+        // Read the contents of the file into a String
+        String wsdl = new BufferedReader(new InputStreamReader(inputStream))
+                .lines().collect(Collectors.joining("\n"));
+
+        // Write the WSDL to the response output stream
+        out.write(wsdl);
+    }
+
+    
 }
