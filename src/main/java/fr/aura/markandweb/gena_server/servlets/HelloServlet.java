@@ -5,6 +5,7 @@ import java.net.URL;
 
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoService;
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
+import jakarta.jws.WebService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -34,12 +35,12 @@ public class HelloServlet extends HttpServlet {
             URL wsdlUrl = new URL("http://localhost:8083/EchoService?wsdl");
 
             // Create a QName object representing the name of the Webservice
-            QName serviceName = new QName("http://localhost:8083/echo", "echoRequest");
+            QName serviceName = new QName("http://localhost:8083/echo", "EchoService");
 
             // Create a Service object using the Service.create() method
-            final EchoService service;
+            final Service service;
             try{
-                service   = (EchoService) Service.create(wsdlUrl, serviceName);
+                service   =  Service.create(wsdlUrl, serviceName);
 
             }catch (WebServiceException ex){
                 System.err.println(ex.getMessage());

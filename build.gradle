@@ -26,14 +26,24 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-
 configurations {
-    compile.exclude group: 'com.sun.xml.ws', module: 'policy'
+    compile.exclude module: "javax.activation-api"
+    compile.exclude module: "javax.annotation-api"
+    compile.exclude module: "javax.inject"
+    compile.exclude module: "javax.interceptor.api"
+    compile.exclude module: "javax.jms-api"
+    compile.exclude module: "javax.json.bind-api"
+    compile.exclude module: "javax.json-api"
+    compile.exclude module: "javax.persistence-api"
+    compile.exclude module: "javax.servlet.jsp.jstl-api"
+    compile.exclude module: "javax.transaction-api"
+
     configureEach {
         exclude group: 'xml-apis', module: 'xml-apis'
         exclude group: 'javax.annotation', module: 'javax.annotation-api'
         exclude group: 'com.sun.xml.ws', module: 'policy'
     }
+
 }
 
 dependencies {
@@ -50,14 +60,21 @@ dependencies {
     implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
     //Jakarta and Sun XML Implementations
+    compileOnly("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
     implementation("jakarta.activation:jakarta.activation-api:2.1.2")
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
     implementation("jakarta.xml.ws:jakarta.xml.ws-api:4.0.0")
     implementation("jakarta.xml.soap:jakarta.xml.soap-api:3.0.0")
-    //OH LORD WHY DID THEY NEVER REPLACE IT ??????????!!!!!!!!!!!
-    implementation("javax.activation:activation:1.1.1")
     implementation("com.sun.xml.bind:jaxb-core:4.0.1")
     implementation("com.sun.xml.bind:jaxb-impl:4.0.1")
+
+    implementation("com.sun.xml.ws:jaxws-ri:4.0.1") {
+        exclude group: 'org.glassfish.metro', module: 'policy'
+    }
+    implementation("org.glassfish.metro:webservices-rt:4.0.2") {
+        exclude group: 'org.glassfish.metro', module: 'policy'
+    }
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.1")
     //implementation("com.sun.xml.ws:rt:4.0.1")
     implementation("com.sun.xml.messaging.saaj:saaj-impl:3.0.2")
     //implementation("com.sun.xml.ws:jaxws-rt:4.0.1")
@@ -69,8 +86,10 @@ dependencies {
     annotationProcessor("jakarta.annotation:jakarta.annotation-api:2.1.1")
 
     //Tomcat Implementations
-    compileOnly("org.apache.tomcat:tomcat-catalina:11.0.0-M5")
     implementation("org.apache.tomcat:tomcat-websocket:11.0.0-M5")
+    implementation("org.apache.tomcat.embed:tomcat-embed-core:11.0.0-M5")
+    implementation("org.apache.tomcat.embed:tomcat-embed-jasper:11.0.0-M5")
+    compileOnly("org.apache.tomcat:tomcat-catalina:11.0.0-M5")
     implementation("org.apache.openwebbeans:openwebbeans-web:2.0.22")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
