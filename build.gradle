@@ -4,6 +4,9 @@ plugins {
     id 'idea'
 }
 
+war {
+    duplicatesStrategy = 'exclude'
+}
 
 group 'fr.aura.markandweb'
 version '1.0-SNAPSHOT'
@@ -25,10 +28,14 @@ tasks.withType(JavaCompile) {
 
 
 configurations {
+    compile.exclude group: 'com.sun.xml.ws', module: 'policy'
     configureEach {
         exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: 'javax.annotation', module: 'javax.annotation-api'
+        exclude group: 'com.sun.xml.ws', module: 'policy'
     }
 }
+
 dependencies {
 
     implementation 'org.jetbrains:annotations:24.0.0'
@@ -42,21 +49,18 @@ dependencies {
     //DI Container
     implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
-    //SOAP IMPLEMENTATIONS
+    //Jakarta and Sun XML Implementations
     implementation("jakarta.activation:jakarta.activation-api:2.1.2")
-    implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
-    implementation("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+    implementation("jakarta.xml.ws:jakarta.xml.ws-api:4.0.0")
     implementation("jakarta.xml.soap:jakarta.xml.soap-api:3.0.0")
+    //OH LORD WHY DID THEY NEVER REPLACE IT ??????????!!!!!!!!!!!
     implementation("javax.activation:activation:1.1.1")
-    implementation("javax.xml.bind:jaxb-api:2.3.0")
-    implementation("com.sun.xml.bind:jaxb-core:2.3.0")
-    implementation("com.sun.xml.bind:jaxb-impl:2.3.0")
-    implementation("com.sun.xml.ws:rt:2.3.3")
-    implementation("com.sun.xml.messaging.saaj:saaj-impl:3.0.1")
-    implementation("com.sun.xml.ws:jaxws-rt:4.0.1")
-    implementation("com.sun.xml.ws:jaxws-tools:4.0.1")
-
-
+    implementation("com.sun.xml.bind:jaxb-core:4.0.1")
+    implementation("com.sun.xml.bind:jaxb-impl:4.0.1")
+    //implementation("com.sun.xml.ws:rt:4.0.1")
+    implementation("com.sun.xml.messaging.saaj:saaj-impl:3.0.2")
+    //implementation("com.sun.xml.ws:jaxws-rt:4.0.1")
 
 
     //Jakarta EE Annotations
@@ -96,8 +100,8 @@ task wsimport {
                     classpath: configurations.jaxws.asPath
             )
             wsimport(keep: true,
-                    sourcedestdir: 'src/main/java',
-                    package: "fr.aura.merkandweb.gena_server",
+                    sourcedestdir: 'src/main/java/',
+                    package: "fr.aura.merkandweb.gena_server.controllers.xml",
                     wsdl: "${projectDir}/src/main/resources/echo.wsdl") {
                 xjcarg(value: "-XautoNameResolution")
             }
