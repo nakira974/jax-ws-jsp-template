@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="gena_server.main:war">
+  <artifact type="war" name="gena_server.main:war">
     <output-path>$PROJECT_DIR$/out/artifacts/gena_server_main_war</output-path>
     <root id="archive" name="gena_server.main_war.war">
       <element id="artifact" artifact-name="gena_server.main:war exploded" />

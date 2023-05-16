@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://localhost:8083/echo/"
+             targetNamespace="http://localhost:8083/echo/"
+             name="EchoService">
+
+    <types>
+        <xsd:schema targetNamespace="http://localhost:8083/echo/">
+            <xsd:element name="echoRequest" type="xsd:string"/>
+            <xsd:element name="echoResponse" type="xsd:string"/>
+        </xsd:schema>
+    </types>
+
+    <message name="echoRequestMessage">
+        <part name="echoRequest" element="tns:echoRequest"/>
+    </message>
+
+    <message name="echoResponseMessage">
+        <part name="echoResponse" element="tns:echoResponse"/>
+    </message>
+
+    <portType name="EchoServicePortType">
+        <operation name="echo">
+            <input message="tns:echoRequestMessage"/>
+            <output message="tns:echoResponseMessage"/>
+        </operation>
+    </portType>
+
+    <binding name="EchoServiceSoapBinding" type="tns:EchoServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="echo">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="EchoService">
+        <port name="EchoServicePort" binding="tns:EchoServiceSoapBinding">
+            <soap:address location="http://localhost:8083/echo"/>
+        </port>
+    </service>
+
+</definitions>
