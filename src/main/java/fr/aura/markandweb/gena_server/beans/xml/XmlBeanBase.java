@@ -1,4 +1,4 @@
-package fr.aura.markandweb.gena_server.beans;
+package fr.aura.markandweb.gena_server.beans.xml;
 
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebServiceException;
@@ -41,6 +41,13 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>{
         }
 
         this.service = Service.create(this.wsdlUrl, this.serviceName);
+    }
+
+    public XmlBeanBase() {
+
+        wsdlUrl = null;
+        serviceName = null;
+        service = null;
     }
 
     @Override

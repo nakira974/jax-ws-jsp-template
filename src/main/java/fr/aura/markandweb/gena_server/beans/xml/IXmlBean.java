@@ -1,4 +1,4 @@
-package fr.aura.markandweb.gena_server.beans;
+package fr.aura.markandweb.gena_server.beans.xml;
 
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
 
