@@ -30,8 +30,9 @@ import java.util.stream.Collectors;
 @ServiceMode(value = Service.Mode.MESSAGE)
 public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
     // The namespace URI and local part used in the SOAP message
-    private static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
-    private static final @NotNull String LOCAL_PART = "echoRequest";
+    public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/echo?wsdl";
+    public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
+    public static final @NotNull String LOCAL_PART = "echoRequest";
 
     /**
      *
