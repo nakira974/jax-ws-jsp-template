@@ -3,7 +3,6 @@ package fr.aura.markandweb.gena_server.servlets.soap;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
-import jakarta.jws.WebService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,10 +27,15 @@ import java.util.stream.Collectors;
  * @author maxim */
 @WebServlet(name = "echoService", urlPatterns = {"/echo"})
 @ServiceMode(value = Service.Mode.MESSAGE)
-public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
-    // The namespace URI and local part used in the SOAP message
+public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMessage> {
+
+    /**The WSDL endpoint to fetch on*/
     public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/echo?wsdl";
+
+    /**The namespace URI used in the SOAP message*/
     public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
+
+    /**The local part used in the SOAP message*/
     public static final @NotNull String LOCAL_PART = "echoRequest";
 
     /**

@@ -1,7 +1,7 @@
 package fr.aura.markandweb.gena_server.beans;
 
 import fr.aura.markandweb.gena_server.beans.xml.XmlBeanBase;
-import fr.aura.markandweb.gena_server.servlets.soap.EchoService;
+import fr.aura.markandweb.gena_server.servlets.soap.EchoMessageServlet;
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -27,7 +27,7 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
      *@exception MalformedURLException The service namespace is incorrect
      * @exception WebServiceException The JAX-WS client runtime has failed while creating the service*/
     public EchoBean() throws MalformedURLException, WebServiceException {
-        super(EchoService.WSDL_ENDPOINT, EchoService.LOCAL_PART);
+        super(EchoMessageServlet.WSDL_ENDPOINT, EchoMessageServlet.LOCAL_PART);
     }
 
     /**@param localPart WSDL service local part
