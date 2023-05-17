@@ -1,5 +1,6 @@
-package fr.aura.markandweb.gena_server.beans.xml;
+package fr.aura.markandweb.gena_server.beans;
 
+import fr.aura.markandweb.gena_server.beans.xml.XmlBeanBase;
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
