@@ -5,6 +5,7 @@ import java.net.URL;
 
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoService;
 import fr.aura.merkandweb.gena_server.controllers.xml.EchoServicePortType;
+import jakarta.jws.WebService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -24,22 +25,27 @@ public class HelloServlet extends HttpServlet {
     }
 
 
-    public void doGet(@NotNull  HttpServletRequest request, @NotNull HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
+    /**
+     * Handles the HTTP GET servletRequest, and send a SOAP servletRequest then print the result
+     * @param servletRequest The HTTP servletRequest
+     * @param servletResponse The HTTP servletResponse
+     */
+    public void doGet(@NotNull  HttpServletRequest servletRequest, @NotNull HttpServletResponse servletResponse) throws IOException {
+        PrintWriter out = servletResponse.getWriter();
+        servletResponse.setContentType("text/html");
         out.println("<html><body>");
         out.println("<h1>" + title + "</h1>");
         try {
             // Create a URL object pointing to the WSDL of the Webservice
-            URL wsdlUrl = new URL("http://localhost:8083/EchoService?wsdl");
+            URL wsdlUrl = new URL("http://localhost:8083/echo?wsdl");
 
             // Create a QName object representing the name of the Webservice
-            QName serviceName = new QName("http://localhost:8083/echo", "echoRequest");
+            QName serviceName = new QName("http://localhost:8083/echo", "EchoService");
 
             // Create a Service object using the Service.create() method
-            final EchoService service;
+            final Service service;
             try{
-                service   = (EchoService) Service.create(wsdlUrl, serviceName);
+                service   =  Service.create(wsdlUrl, serviceName);
 
             }catch (WebServiceException ex){
                 System.err.println(ex.getMessage());
@@ -54,8 +60,8 @@ public class HelloServlet extends HttpServlet {
 
             // Print the result
             out.println("<p>Result: " + echoedString + "</p>");
-            // Process the SOAP response
-            System.out.println(response);
+            // Process the SOAP servletResponse
+            System.out.println(servletResponse);
 
         } catch (Exception e) {
             // Handle exception
@@ -67,18 +73,19 @@ public class HelloServlet extends HttpServlet {
         out.println("</body></html>");
     }
 
-    protected void doPost(@NotNull HttpServletRequest request,@NotNull HttpServletResponse response)
+    /**
+     * Handles the HTTP PATCH servletRequest
+     * @param servletRequest The HTTP servletRequest
+     * @param servletResponse The HTTP servletResponse
+     */
+    protected void doPost(@NotNull HttpServletRequest servletRequest,@NotNull HttpServletResponse servletResponse)
             throws ServletException, IOException {
-        String method = request.getMethod();
+        String method = servletRequest.getMethod();
         if (method.equalsIgnoreCase("PATCH")) {
-            // Handle PATCH request
+            // Handle PATCH servletRequest
             // ...
         } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            servletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
-    }
-
-
-    public void destroy() {
     }
 }
