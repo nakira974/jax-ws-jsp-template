@@ -1,6 +1,10 @@
 package fr.aura.markandweb.gena_server.servlets.soap;
 
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,15 +13,20 @@ import jakarta.xml.soap.*;
 import jakarta.xml.ws.Provider;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.ServiceMode;
-import jakarta.xml.ws.WebServiceContext;
-import jakarta.xml.ws.handler.MessageContext;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
+import java.io.*;
+import java.util.stream.Collectors;
 
-@WebServlet(name = "echoService", urlPatterns = {"/EchoService"})
+/**
+ * This is a template for xml WS, I'd like to demonstrate how cool and simple is a low level approach
+ * to create performing asynchronous xml WS.
+ * This kind of JAX-WS using a servlet to catch the main request is quite old I know,
+ * but as a Java Web programmer it could be very useful to find a modern template to rely on.
+ * @author maxim */
+@WebServlet(name = "echoService", urlPatterns = {"/echo"})
 @ServiceMode(value = Service.Mode.MESSAGE)
 public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
     // The namespace URI and local part used in the SOAP message
@@ -61,45 +70,74 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
 
                 return soapMessage;
             }
-        } catch (SOAPException e) {
-            e.printStackTrace();
+        } catch (SOAPException ex) {
+            System.err.println(ex.getMessage());
         }
 
         return null;
     }
 
+    /** Simple WebMethod to show how a client can send data to JAX-WS by being intercepted by the servlet before
+     * @param message Message send from SOAP client
+     * @return Reponse send to the SOAP client*/
+    @WebMethod(operationName = "echo")
+    public @WebResult(name = "echoResponse") String echo(@WebParam(name = "echoRequest") String message) {
+        return message;
+    }
+
     /**
-     * Handles the HTTP POST request, extracts the SOAP message from the request,
+     * Handles the HTTP POST servletRequest, extracts the SOAP message from the servletRequest,
      * invokes the SOAP service by calling the 'invoke' method, and writes the
-     * resulting SOAP message to the response output stream.
-     * @param req The HTTP request
-     * @param resp The HTTP response
+     * resulting SOAP message to the servletResponse output stream.
+     * @param servletRequest The HTTP servletRequest
+     * @param servletResponse The HTTP servletResponse
      */
     @Override
-    public void doPost(@NotNull HttpServletRequest req, @NotNull  HttpServletResponse resp) throws IOException {
-        // Get the WebServiceContext and MessageContext
-        WebServiceContext wsContext = (WebServiceContext) req.getAttribute(WebServiceContext.class.getName());
-        MessageContext msgContext = wsContext.getMessageContext();
+    public void doPost(@NotNull HttpServletRequest servletRequest, @NotNull HttpServletResponse servletResponse) throws IOException {
+        try {
+            // Get the SOAP message from the servletRequest input stream
+            MessageFactory factory = MessageFactory.newInstance();
+            SOAPMessage requestMessage = factory.createMessage(null, servletRequest.getInputStream());
 
-        // Extract the SOAP message from the request
-        SOAPMessage request = (SOAPMessage) msgContext.get(MessageContext.SERVLET_REQUEST);
+            // Invoke the SOAP service and get the servletResponse message
+            SOAPMessage soapResponse = invoke(requestMessage);
 
-        // Invoke the SOAP service and get the resulting SOAP message
-        SOAPMessage response = invoke(request);
-
-        if (response != null) {
-            try {
-                // Set the response HTTP status and content type headers
-                resp.setStatus(HttpServletResponse.SC_OK);
-                resp.setContentType("text/xml;charset=utf-8");
-
-                // Write the SOAP message to the response output stream
-                response.writeTo(resp.getOutputStream());
-            } catch (SOAPException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            // Set the servletResponse content type and write the servletResponse message to the output stream
+            servletResponse.setContentType("text/xml;charset=utf-8");
+            servletResponse.setStatus(HttpServletResponse.SC_OK);
+            OutputStream os = servletResponse.getOutputStream();
+            soapResponse.writeTo(os);
+            os.flush();
+            os.close();
+        } catch (SOAPException e) {
+            throw new RuntimeException("Error handling SOAP message", e);
         }
     }
+
+    /**
+     * Handles the HTTP GET servletRequest, and send back to the client the WSDL of the JAX-WS.
+     * @param servletRequest The HTTP servletRequest
+     * @param servletResponse The HTTP servletResponse
+     */
+    @Override
+    protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
+        servletResponse.setContentType("text/xml");
+        PrintWriter out = servletResponse.getWriter();
+
+        // Load the WSDL definition from a file in the resources folder
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("echo.wsdl");
+        if (inputStream == null) {
+            throw new RuntimeException("WSDL not found");
+        }
+
+        // Read the contents of the file into a String
+        String wsdl = new BufferedReader(new InputStreamReader(inputStream))
+                .lines().collect(Collectors.joining("\n"));
+
+        // Write the WSDL to the servletResponse output stream
+        out.write(wsdl);
+    }
+
+    
 }
