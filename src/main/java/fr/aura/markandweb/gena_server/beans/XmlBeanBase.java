@@ -23,6 +23,8 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>{
 
 
     /**JAX-WS Client bean default constructor
+     * @param wsdlUrl WSDL fetch url : <p><b>http://localhost:8083/echo?wsd"</b></p>"
+     * @param localPart WSDL service local part
      * @since 17/05/2023*/
     protected XmlBeanBase(@NotNull String wsdlUrl, @NotNull String localPart) throws MalformedURLException, WebServiceException {
         String regex = "\\?wsdl$"; // matches the ?wsdl at the end of the string
