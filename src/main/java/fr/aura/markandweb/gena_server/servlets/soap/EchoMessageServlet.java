@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @ServiceMode(value = Service.Mode.MESSAGE)
 public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMessage> {
 
-    /**The WSDL endpoint to fetch on*/
+    /**The WSDL scheme endpoint*/
     public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/echo?wsdl";
 
     /**The namespace URI used in the SOAP message*/
