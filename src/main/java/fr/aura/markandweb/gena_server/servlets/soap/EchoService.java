@@ -114,10 +114,15 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
         }
     }
 
+    /**
+     * Handles the HTTP GET servletRequest, and send back to the client the WSDL of the JAX-WS.
+     * @param servletRequest The HTTP servletRequest
+     * @param servletResponse The HTTP servletResponse
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/xml");
-        PrintWriter out = response.getWriter();
+    protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
+        servletResponse.setContentType("text/xml");
+        PrintWriter out = servletResponse.getWriter();
 
         // Load the WSDL definition from a file in the resources folder
         ClassLoader classLoader = getClass().getClassLoader();
@@ -130,7 +135,7 @@ public class EchoService extends HttpServlet implements Provider<SOAPMessage> {
         String wsdl = new BufferedReader(new InputStreamReader(inputStream))
                 .lines().collect(Collectors.joining("\n"));
 
-        // Write the WSDL to the response output stream
+        // Write the WSDL to the servletResponse output stream
         out.write(wsdl);
     }
 
