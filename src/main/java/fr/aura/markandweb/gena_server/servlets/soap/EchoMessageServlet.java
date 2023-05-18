@@ -38,7 +38,10 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
     public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
 
     /**The local part used in the SOAP message*/
-    public static final @NotNull String LOCAL_PART = "echoRequest";
+    public static final @NotNull String LOCAL_PART = "EchoService";
+
+    /**SOAP default MIME format*/
+    private static final @NotNull String SOAP_DEFAULT_MIME = "text/xml;charset=utf-8";
 
     /**
      *
@@ -66,7 +69,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
             if (!body.hasFault()) {
                 // Extract the message content from the SOAP element
                 SOAPElement echoRequest = (SOAPElement) body.getChildElements(
-                        new QName(NAMESPACE_URI, LOCAL_PART)).next();
+                        new QName(NAMESPACE_URI, "echoRequest")).next();
                 String message = echoRequest.getValue();
 
                 // Create a new SOAP message with the same content as the response
@@ -110,7 +113,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
             SOAPMessage soapResponse = invoke(requestMessage);
 
             // Set the servletResponse content type and write the servletResponse message to the output stream
-            servletResponse.setContentType("application/xml;charset=utf-8");
+            servletResponse.setContentType(SOAP_DEFAULT_MIME);
             servletResponse.setStatus(HttpServletResponse.SC_OK);
             OutputStream networkStream = servletResponse.getOutputStream();
             soapResponse.writeTo(networkStream);
@@ -128,7 +131,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
      */
     @Override
     protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
-        servletResponse.setContentType("application/xml");
+        servletResponse.setContentType(SOAP_DEFAULT_MIME);
         PrintWriter out = servletResponse.getWriter();
 
         // Load the WSDL definition from a file in the resources folder

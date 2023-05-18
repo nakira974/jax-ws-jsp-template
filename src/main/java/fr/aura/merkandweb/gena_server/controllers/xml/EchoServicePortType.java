@@ -15,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlSeeAlso;
  * Generated source version: 3.0
  * 
  */
-@WebService(name = "EchoServicePortType", targetNamespace = "http://localhost:8083/echo/")
+@WebService(name = "EchoServicePortType", targetNamespace = "http://localhost:8083/echo")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
     ObjectFactory.class
@@ -30,9 +30,9 @@ public interface EchoServicePortType {
      *     returns java.lang.String
      */
     @WebMethod
-    @WebResult(name = "echoResponse", targetNamespace = "http://localhost:8083/echo/", partName = "echoResponse")
+    @WebResult(name = "echoResponse", targetNamespace = "http://localhost:8083/echo", partName = "echoResponse")
     public String echo(
-        @WebParam(name = "echoRequest", targetNamespace = "http://localhost:8083/echo/", partName = "echoRequest")
+        @WebParam(name = "echoRequest", targetNamespace = "http://localhost:8083/echo", partName = "echoRequest")
         String echoRequest);
 
 }
