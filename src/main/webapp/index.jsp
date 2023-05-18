@@ -10,6 +10,7 @@
 
 <h1>Welcome to My Chat App!</h1>
 
+
 <jsp:include page="chat.jsp" />
 
 </body>
