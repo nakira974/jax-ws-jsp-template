@@ -9,5 +9,6 @@
 </h1>
 <br/>
 <a href="hello-servlet">Redirect to HelloServlet</a>
+<iframe src="chat.xhtml"></iframe>
 </body>
 </html>

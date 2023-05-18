@@ -6,13 +6,14 @@ import jakarta.xml.ws.WebServiceException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.namespace.QName;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/** Base bean for designing SOAP client/server interactions inside a JSF/Facelet
+/** Bean pattern for designing SOAP client/server interactions inside a JSF/Facelet
  * @see fr.aura.markandweb.gena_server.beans.xml.IXmlBean
  * @author maxim */
-public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>{
+public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>, Serializable {
 
     /**WSDL fetch URL*/
     private final URL wsdlUrl;
@@ -66,12 +67,12 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>{
         try {
             this.wsdlUrl = new URL(wsdlUrl);
         } catch (MalformedURLException e) {
-            throw new MalformedURLException("Bad wsdl endpoint format!");
+            throw new MalformedURLException("Bad WSDL endpoint format!");
         }
         try {
             this.serviceName = new QName(getServiceUrl(), getLocalPart());
         }catch (IllegalArgumentException ex){
-            throw new MalformedURLException("Bad wsdl endpoint format!");
+            throw new MalformedURLException("Bad WSDL endpoint format!");
         }
 
         this.service = Service.create(getWsdlUrl(), getServiceName());
