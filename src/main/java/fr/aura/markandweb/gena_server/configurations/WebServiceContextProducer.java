@@ -1,4 +1,4 @@
-package fr.aura.markandweb.gena_server.services;
+package fr.aura.markandweb.gena_server.configurations;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;

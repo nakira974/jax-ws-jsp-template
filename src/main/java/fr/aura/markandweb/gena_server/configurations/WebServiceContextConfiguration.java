@@ -1,6 +1,5 @@
 package fr.aura.markandweb.gena_server.configurations;
 
-import fr.aura.markandweb.gena_server.services.WebServiceContextProducer;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.xml.ws.WebServiceContext;
