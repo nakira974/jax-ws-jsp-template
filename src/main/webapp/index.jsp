@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Chat App</title>
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
 

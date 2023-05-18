@@ -2,7 +2,7 @@
 <jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
 
 <form>
-    <input type="text" id="message" name="message" value="${echoBean.echoedString}">
+    <label for="message"></label><input type="text" id="message" name="message" value="${echoBean.echoedString}">
     <button type="submit" id="submit">Send</button>
 </form>
 
