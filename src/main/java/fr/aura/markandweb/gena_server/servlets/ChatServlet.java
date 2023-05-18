@@ -30,18 +30,20 @@ public class ChatServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String message = request.getParameter("message");
-        if (message != null) {
-            echoBean.echo(message);
-        }
-
-        // Send the chat history as a JSON response
         List<String> chatHistory = echoBean.getChatHistory();
         String json = new Gson().toJson(chatHistory);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         out.write(json);
+
+        String message = request.getParameter("message");
+        if (message != null) {
+            echoBean.echo(message);
+        }
+        request.setAttribute("chatHistory", echoBean.getChatHistory());
+        request.getRequestDispatcher("chat.jsp").forward(request, response);
+
     }
 
     @Override
