@@ -3,6 +3,7 @@ package fr.aura.markandweb.gena_server.servlets.soap;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,9 +28,10 @@ import java.util.stream.Collectors;
  * @author maxim */
 @WebServlet(name = "echoService", urlPatterns = {"/echo"})
 @ServiceMode(value = Service.Mode.MESSAGE)
+@WebService
 public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMessage> {
 
-    /**The WSDL endpoint to fetch on*/
+    /**The WSDL scheme endpoint*/
     public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/echo?wsdl";
 
     /**The namespace URI used in the SOAP message*/
@@ -40,7 +42,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
 
     /**
      *
-     * @return Service's namespace
+     * @return JAX-WS namespace URI
      */
     public static @NotNull String getNamespaceUri(){
         return NAMESPACE_URI;
@@ -101,19 +103,19 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
     public void doPost(@NotNull HttpServletRequest servletRequest, @NotNull HttpServletResponse servletResponse) throws IOException {
         try {
             // Get the SOAP message from the servletRequest input stream
-            MessageFactory factory = MessageFactory.newInstance();
-            SOAPMessage requestMessage = factory.createMessage(null, servletRequest.getInputStream());
+            MessageFactory messageFactory = MessageFactory.newInstance();
+            SOAPMessage requestMessage = messageFactory.createMessage(null, servletRequest.getInputStream());
 
             // Invoke the SOAP service and get the servletResponse message
             SOAPMessage soapResponse = invoke(requestMessage);
 
             // Set the servletResponse content type and write the servletResponse message to the output stream
-            servletResponse.setContentType("text/xml;charset=utf-8");
+            servletResponse.setContentType("application/xml;charset=utf-8");
             servletResponse.setStatus(HttpServletResponse.SC_OK);
-            OutputStream os = servletResponse.getOutputStream();
-            soapResponse.writeTo(os);
-            os.flush();
-            os.close();
+            OutputStream networkStream = servletResponse.getOutputStream();
+            soapResponse.writeTo(networkStream);
+            networkStream.flush();
+            networkStream.close();
         } catch (SOAPException e) {
             throw new RuntimeException("Error handling SOAP message", e);
         }
@@ -126,7 +128,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
      */
     @Override
     protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
-        servletResponse.setContentType("text/xml");
+        servletResponse.setContentType("application/xml");
         PrintWriter out = servletResponse.getWriter();
 
         // Load the WSDL definition from a file in the resources folder
