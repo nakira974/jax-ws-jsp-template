@@ -94,6 +94,9 @@ dependencies {
     compileOnly("org.apache.tomcat:tomcat-catalina:11.0.0-M5")
     implementation("org.apache.openwebbeans:openwebbeans-web:2.0.22")
 
+    //Google Implementations
+    implementation("com.google.code.gson:gson:2.10.1")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

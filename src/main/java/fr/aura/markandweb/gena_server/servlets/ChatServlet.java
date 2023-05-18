@@ -1,5 +1,6 @@
 package fr.aura.markandweb.gena_server.servlets;
 
+import com.google.gson.Gson;
 import fr.aura.markandweb.gena_server.beans.EchoBean;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,7 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.ws.WebServiceException;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.util.List;
 
 @WebServlet("/chat")
 public class ChatServlet extends HttpServlet {
@@ -31,7 +34,24 @@ public class ChatServlet extends HttpServlet {
         if (message != null) {
             echoBean.echo(message);
         }
-        request.setAttribute("chatHistory", echoBean.getChatHistory());
-        request.getRequestDispatcher("chat.jsp").forward(request, response);
+
+        // Send the chat history as a JSON response
+        List<String> chatHistory = echoBean.getChatHistory();
+        String json = new Gson().toJson(chatHistory);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(json);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Send the chat history as a JSON response
+        List<String> chatHistory = echoBean.getChatHistory();
+        String json = new Gson().toJson(chatHistory);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(json);
     }
 }

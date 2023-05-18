@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
 
-<form>
+<form id="messageForm" method="post" action="${pageContext.request.contextPath}/chat">
     <label for="message"></label><input type="text" id="message" name="message" value="${echoBean.echoedString}">
     <button type="submit" id="submit">Send</button>
 </form>
@@ -14,28 +14,31 @@
     </c:forEach>
 </ul>
 
-<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script type='text/javascript'>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
     $(document).ready(function() {
-        $('form').submit(function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: '/chat',
-                type: 'POST',
-                data: {'message': $('#message').val()},
-                success: function(response) {
-                    $('#chatHistory').empty();
-                    $.each(response, function(index, message) {
-                        $('<li>').text(message).appendTo('#chatHistory');
-                    });
-                    $('#message').val('');
-                },
-                error: function(xhr, status, error) {
-                    alert('Error sending message!');
-                    console.log(error);
-                }
+        // Fetch the initial chat history
+        updateChatHistory();
+
+        // Submit the message form via AJAX
+        $('#messageForm').submit(function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            $.post($(this).attr('action'), $(this).serialize(), function() {
+                // Clear the input field and refresh the chat history
+                $('#message').val('');
+                updateChatHistory();
             });
         });
+
+        // Function to fetch the updated chat history and update the UI
+        function updateChatHistory() {
+            $.getJSON('/chat', function(chatHistory) {
+                var html = '';
+                $.each(chatHistory, function(index, msg) {
+                    html += '<li>' + msg + '</li>'
+                });
+                $('#chatHistory').html(html);
+            });
+        }
     });
 </script>
