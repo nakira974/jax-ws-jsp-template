@@ -27,15 +27,12 @@ h1 {
   margin-bottom: 1rem;
 }
 
-// Chat styles
-#chatContainer {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+h2 {
+  grid-row: 1; /* Position the heading in the first row */
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
+
 
 input[type="text"] {
   padding: 0.5rem;
@@ -44,8 +41,6 @@ input[type="text"] {
   font-family: 'JetBrains Mono Light', monospace;
   font-size: 1.1rem;
   color: $color-text;
-  margin-right: 0.5rem;
-  width: 100%;
 }
 
 button[type="submit"] {
@@ -63,7 +58,21 @@ button[type="submit"] {
   }
 }
 
+form {
+  grid-row: 3; /* Position the message form in the third row */
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Define the columns for the message form */
+  grid-gap: 0.5rem;
+  align-items: center;
+}
+
+label {
+  font-size: 1.1rem;
+}
+
+/**IDS*/
 #chatHistory {
+  grid-row: 2; /* Position the chat history in the second row */
   list-style: none;
   margin-top: 1rem;
   max-height: 400px;
@@ -90,7 +99,19 @@ button[type="submit"] {
   }
 }
 
+// Chat styles
+#chatContainer {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Define the rows for the chat container */
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
