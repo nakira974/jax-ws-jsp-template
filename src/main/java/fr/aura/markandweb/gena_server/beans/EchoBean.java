@@ -61,8 +61,18 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
      */
     public String echo(String message) {
         getChatHistory().add(String.format("%s : %s", "User", message));
-        setEchoedString(getPort().echo(message));
-        getChatHistory().add(String.format("%s : %s", "Server", getEchoedString()));
+        String echoRequest = "";
+        try{
+            final EchoServicePortType echoServicePortType = getPort();
+            final String tempEchoResponse = echoServicePortType.echo(message);
+            echoRequest = tempEchoResponse;
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+       ;
+        setEchoedString(echoRequest);
+        final String echoReply = getEchoedString();
+        getChatHistory().add(String.format("%s : %s", "Server", echoReply));
         return getEchoedString();
     }
 
