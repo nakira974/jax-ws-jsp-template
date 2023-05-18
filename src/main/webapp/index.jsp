@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>My Chat App</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Redirect to HelloServlet</a>
-<iframe src="chat.xhtml"></iframe>
+
+<h1>Welcome to My Chat App!</h1>
+
+<jsp:include page="chat.jsp" />
+
 </body>
 </html>

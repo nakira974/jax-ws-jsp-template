@@ -54,7 +54,7 @@ dependencies {
     compileOnly('jakarta.jms:jakarta.jms-api:3.1.0')
     compileOnly('jakarta.mvc:jakarta.mvc-api:2.1.0')
     compileOnly("jakarta.platform:jakarta.jakartaee-api:10.0.0")
-    implementation files('src/main/webapp/WEB-INF/lib/jstl-1.2-sources.jar')
+    implementation 'javax.servlet:jstl:1.2'
 
     //DI Container
     implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
