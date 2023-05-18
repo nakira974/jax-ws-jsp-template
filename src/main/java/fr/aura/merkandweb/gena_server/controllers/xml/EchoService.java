@@ -17,20 +17,20 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "EchoService", targetNamespace = "http://localhost:8083/echo/", wsdlLocation = "file:/C:/Users/maxim/IdeaProjects/gena_server/src/main/resources/echo.wsdl")
+@WebServiceClient(name = "EchoService", targetNamespace = "http://localhost:8083/echo", wsdlLocation = "file:/C:/Users/maxim/IdeaProjects/jax-ws-template/src/main/resources/echo.wsdl")
 public class EchoService
     extends Service
 {
 
     private static final URL ECHOSERVICE_WSDL_LOCATION;
     private static final WebServiceException ECHOSERVICE_EXCEPTION;
-    private static final QName ECHOSERVICE_QNAME = new QName("http://localhost:8083/echo/", "EchoService");
+    private static final QName ECHOSERVICE_QNAME = new QName("http://localhost:8083/echo", "EchoService");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Users/maxim/IdeaProjects/gena_server/src/main/resources/echo.wsdl");
+            url = new URL("file:/C:/Users/maxim/IdeaProjects/jax-ws-template/src/main/resources/echo.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -69,7 +69,7 @@ public class EchoService
      */
     @WebEndpoint(name = "EchoServicePort")
     public EchoServicePortType getEchoServicePort() {
-        return super.getPort(new QName("http://localhost:8083/echo/", "EchoServicePort"), EchoServicePortType.class);
+        return super.getPort(new QName("http://localhost:8083/echo", "EchoServicePort"), EchoServicePortType.class);
     }
 
     /**
@@ -81,7 +81,7 @@ public class EchoService
      */
     @WebEndpoint(name = "EchoServicePort")
     public EchoServicePortType getEchoServicePort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://localhost:8083/echo/", "EchoServicePort"), EchoServicePortType.class, features);
+        return super.getPort(new QName("http://localhost:8083/echo", "EchoServicePort"), EchoServicePortType.class, features);
     }
 
     private static URL __getWsdlLocation() {

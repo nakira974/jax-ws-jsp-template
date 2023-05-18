@@ -38,7 +38,7 @@ public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMess
     public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
 
     /**The local part used in the SOAP message*/
-    public static final @NotNull String LOCAL_PART = "echoRequest";
+    public static final @NotNull String LOCAL_PART = "EchoService";
 
     /**
      *

@@ -54,8 +54,10 @@ dependencies {
     compileOnly('jakarta.jms:jakarta.jms-api:3.1.0')
     compileOnly('jakarta.mvc:jakarta.mvc-api:2.1.0')
     compileOnly("jakarta.platform:jakarta.jakartaee-api:10.0.0")
-    implementation 'javax.servlet:jstl:1.2'
-
+    //JSP Implementations
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
+    compileOnly("jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.1")
     //DI Container
     implementation ("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
 
