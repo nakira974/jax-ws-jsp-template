@@ -9,6 +9,8 @@ import jakarta.xml.ws.WebServiceException;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Simple Java Bean for interacting with a SOAP web service that provides an <b style="color:#d87d58"><u>echo</u></b> method.
  * The <b style="color:#d87d58"><u>EchoBean</u></b> extends the  {@link XmlBeanBase<EchoServicePortType>} class,
@@ -23,11 +25,15 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
     /**String sent to the SOAP endpoint*/
     private String echoedString;
 
+    /**Messages history*/
+    private List<String> chatHistory = new ArrayList<>();
+
     /**EchoBean default constructor
      *@exception MalformedURLException The service namespace is incorrect
      * @exception WebServiceException The JAX-WS client runtime has failed while creating the service*/
     public EchoBean() throws MalformedURLException, WebServiceException {
         super(EchoMessageServlet.WSDL_ENDPOINT, EchoMessageServlet.LOCAL_PART);
+        chatHistory = new ArrayList<>();
     }
 
     /**@param localPart WSDL service local part
@@ -54,12 +60,19 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
      * @return Response from the SOAP endpoint
      */
     public String echo(String message) {
+        getChatHistory().add(String.format("%s : %s", "User", message));
         setEchoedString(getPort().echo(message));
+        getChatHistory().add(String.format("%s : %s", "Server", getEchoedString()));
         return getEchoedString();
     }
 
     /**@return The JAX-WS Port Type of the current bean*/
     public EchoServicePortType getPort() {
         return super.getPort(EchoServicePortType.class);
+    }
+
+    /**@return Messages history between the client and the server*/
+    public List<String> getChatHistory() {
+        return chatHistory;
     }
 }
