@@ -17,7 +17,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "EchoService", targetNamespace = "http://localhost:8083/echo", wsdlLocation = "file:/C:/Users/maxim/IdeaProjects/jax-ws-template/src/main/resources/echo.wsdl")
+@WebServiceClient(name = "EchoService", targetNamespace = "http://localhost:8083/echo", wsdlLocation = "file:/C:/Repositories/svn/intranet/jax-ws-template/src/main/resources/echo.wsdl")
 public class EchoService
     extends Service
 {
@@ -30,7 +30,7 @@ public class EchoService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Users/maxim/IdeaProjects/jax-ws-template/src/main/resources/echo.wsdl");
+            url = new URL("file:/C:/Repositories/svn/intranet/jax-ws-template/src/main/resources/echo.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
