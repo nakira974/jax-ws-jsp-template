@@ -59,8 +59,18 @@ public class TomcatServer extends HttpServlet {
      * @throws LifecycleException If there is a life-cycle error.
      */
     public void stop() throws LifecycleException {
-        tomcat.stop();
-        tomcat.destroy();
-        tomcat.getServer().await();
+        if (tomcat != null) {
+            tomcat.stop();
+            tomcat.destroy();
+        }
+    }
+
+    /**
+     * Gets the Tomcat instance.
+     *
+     * @return The Tomcat instance.
+     */
+    public Tomcat getTomcat() {
+        return tomcat;
     }
 }
