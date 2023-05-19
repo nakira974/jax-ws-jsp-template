@@ -21,18 +21,18 @@
         <span class="announcement">Join our community chat today!</span>
     </div>
     <ul class="nav-links">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/profile">Profile</a>
+        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+        <li><a href="${pageContext.request.contextPath}/profile">Profile</a>
             <ul class="submenu">
-                <li><a href="/my-robots">My Robots</a></li>
-                <li><a href="/my-bots">My Bots</a></li>
+                <li><a href="${pageContext.request.contextPath}/my-robots">My Robots</a></li>
+                <li><a href="${pageContext.request.contextPath}/my-bots">My Bots</a></li>
             </ul>
         </li>
         <c:if test="${empty sessionScope.user}">
-            <li><a href="/login">Login</a></li>
+            <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         </c:if>
         <c:if test="${not empty sessionScope.user}">
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </c:if>
     </ul>
 </div>
