@@ -8,6 +8,6 @@ import org.jetbrains.annotations.NotNull;
  * @param <PortType> Target WSDL
  * */
 public interface IXmlBean<PortType> {
-    /**@return JAX-WS WSDL port*/
+    /**@return The JAX-WS WSDL PortType instance*/
     PortType getPort(Class<PortType> portTypeClass);
 }
