@@ -19,19 +19,19 @@
 }
 
 .announcements {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
 }
 
 .announcement {
   animation: roll 10s linear infinite;
-  font-family: 'Economica', sans-serif;
   background-color: #f2d9c8;
-  color: #38352d;
-  padding: 0.5rem;
-  margin-right: 1rem;
   border-radius: 0.25rem;
+  color: #38352d;
+  font-family: 'Economica', sans-serif;
+  margin-right: 1rem;
+  padding: 0.5rem;
 }
 
 .nav-links {
@@ -105,8 +105,8 @@
   }
 
   .nav-links {
-    width: 100%;
     justify-content: space-around;
+    width: 100%;
   }
 
   .nav-links a {

@@ -34,6 +34,7 @@
         <c:if test="${not empty sessionScope.user}">
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </c:if>
+        <li><a href="${pageContext.request.contextPath}/chat">Chat</a></li>
     </ul>
 </div>
 

@@ -13,13 +13,17 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-<jsp:include page="components/shared/navbar.jsp" />
+
+<div>
+    <jsp:include page="components/shared/navbar.jsp" />
+</div>
 
 <h1>Welcome to My Chat App!</h1>
 
 <div class="animation-container"></div>
-
-<jsp:include page="components/chat.jsp" />
+<div>
+    <jsp:include page="components/chat.jsp" />
+</div>
 
 <script type="text/javascript">
     function updateAnimation() {

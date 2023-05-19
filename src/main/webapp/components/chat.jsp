@@ -4,25 +4,33 @@
   Date: 20/05/2023
   Time: 12:35 am
 --%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/app.css">
+</head>
+<body>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+    <jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
 
-<div id="chatContainer">
-    <h2>Chat history:</h2>
+    <div id="chatContainer">
+            <h2>Chat history:</h2>
 
-    <ul id="chatHistory">
-        <c:forEach var="msg" items="${echoBean.chatHistory}">
-            <li>${msg}</li>
-        </c:forEach>
-    </ul>
+            <ul id="chatHistory">
+                <c:forEach var="msg" items="${echoBean.chatHistory}">
+                    <li>${msg}</li>
+                </c:forEach>
+            </ul>
 
-    <form id="messageForm" method="post" action="${pageContext.request.contextPath}/chat">
-        <label for="message">Type your message:</label>
-        <input type="text" id="message" name="message" value="${echoBean.echoedString}">
-        <button type="submit" id="submit">Send</button>
-    </form>
-</div>
+            <form id="messageForm" method="post" action="${pageContext.request.contextPath}/chat">
+                <label for="message">Type your message:</label>
+                <input type="text" id="message" name="message" value="${echoBean.echoedString}">
+                <button type="submit" id="submit">Send</button>
+            </form>
+    </div>
 
+</body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -51,3 +59,4 @@
         }
     });
 </script>
+</html>
