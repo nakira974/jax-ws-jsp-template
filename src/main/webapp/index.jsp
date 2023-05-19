@@ -10,8 +10,25 @@
 
 <h1>Welcome to My Chat App!</h1>
 
+<div class="animation-container"></div>
 
 <jsp:include page="chat.jsp" />
 
+<script type="text/javascript">
+    function updateAnimation() {
+        // Get current hour
+        var hour = new Date().getHours();
+
+        // Set time-specific class
+        if (hour >= 6 && hour <= 18) {
+            document.querySelector('.animation-container').classList.add('day');
+        } else {
+            document.querySelector('.animation-container').classList.add('night');
+        }
+    }
+
+    // Call the function when the page is loaded
+    window.onload = updateAnimation;
+</script>
 </body>
 </html>
