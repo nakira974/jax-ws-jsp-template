@@ -16,19 +16,20 @@
 
 <script type="text/javascript">
     function updateAnimation() {
-        // Get current hour
         var hour = new Date().getHours();
+        var container = document.querySelector('.animation-container');
 
-        // Set time-specific class
         if (hour >= 6 && hour <= 18) {
-            document.querySelector('.animation-container').classList.add('day');
+            container.classList.remove('night');
+            container.classList.add('day');
         } else {
-            document.querySelector('.animation-container').classList.add('night');
+            container.classList.remove('day');
+            container.classList.add('night');
         }
     }
 
     // Call the function when the page is loaded
-    window.onload = updateAnimation;
+    window.addEventListener('load', updateAnimation);
 </script>
 </body>
 </html>
