@@ -43,6 +43,7 @@ public class WebServiceContextConfiguration {
             ctx.unbind(contextName);
 
         } catch (NamingException e) {
+            System.out.println(e.getMessage());
             // Ignore any errors during destruction
         }
     }
