@@ -10,15 +10,15 @@ $color-text: #38352d;
 
 // Global styles
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  color: $color-text;
   background-color: $color-background;
+  color: $color-text;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -28,29 +28,29 @@ h1 {
 }
 
 h2 {
-  grid-row: 1; /* Position the heading in the first row */
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Position the heading in the first row */
+  grid-row: 1;
   margin-bottom: 1rem;
 }
 
 
 input[type="text"] {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
   border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  color: $color-text;
   font-family: 'JetBrains Mono Light', monospace;
   font-size: 1.1rem;
-  color: $color-text;
+  padding: 0.5rem;
 }
 
 button[type="submit"] {
   background-color: $color-secondary;
-  color: white;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
   border: none;
+  border-radius: 0.25rem;
+  color: white;
   cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
   transition: background-color 0.2s ease;
 
   &:hover {
@@ -59,11 +59,11 @@ button[type="submit"] {
 }
 
 form {
-  grid-row: 3; /* Position the message form in the third row */
+  align-items: center; /* Position the message form in the third row */
   display: grid;
-  grid-template-columns: auto 1fr auto; /* Define the columns for the message form */
-  grid-gap: 0.5rem;
-  align-items: center;
+  grid-gap: 0.5rem; /* Define the columns for the message form */
+  grid-row: 3;
+  grid-template-columns: auto 1fr auto;
 }
 
 label {
@@ -80,15 +80,15 @@ label {
 }
 
 #chatHistory li {
+  animation: fadein 0.5s;
+  background-color: #f5f5f5;
+  border-radius: 0.25rem;
+  display: inline-block;
+  font-family: 'Economica', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  border-radius: 0.25rem;
-  background-color: #f5f5f5;
-  font-family: 'Economica', sans-serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  display: inline-block;
-  animation: fadein 0.5s;
 
   &:nth-child(even) {
     background-color: #e0e0e0;
@@ -101,12 +101,12 @@ label {
 
 // Chat styles
 #chatContainer {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* Define the rows for the chat container */
   background-color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem; /* Define the rows for the chat container */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1rem;
 }
 
 
