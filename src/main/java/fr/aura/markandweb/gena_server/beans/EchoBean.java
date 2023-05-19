@@ -45,21 +45,22 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
     }
 
     /**@return The last response from the SOAP endpoint*/
-    public String getEchoedString() {
+    public @NotNull String getEchoedString() {
         return echoedString;
     }
 
     /** Define the message to send
      * @param echoedString Message to send to the SOAP endpoint*/
-    public void setEchoedString(String echoedString) {
+    public void setEchoedString(@NotNull String echoedString) {
         this.echoedString = echoedString;
     }
 
-    /** Send a POST over SOAP to call the "echo" method
+    /**
+     * Send a POST over SOAP to call the "echo" method
+     *
      * @param message Message to send to the SOAP endpoint
-     * @return Response from the SOAP endpoint
      */
-    public String echo(String message) {
+    public void echo(@NotNull String message) {
         getChatHistory().add(String.format("%s : %s", "User", message));
         String echoRequest = "";
         try{
@@ -73,16 +74,15 @@ public class EchoBean extends XmlBeanBase<EchoServicePortType> {
         setEchoedString(echoRequest);
         final String echoReply = getEchoedString();
         getChatHistory().add(String.format("%s : %s", "Server", echoReply));
-        return getEchoedString();
     }
 
     /**@return The JAX-WS Port Type of the current bean*/
-    public EchoServicePortType getPort() {
+    public  @NotNull EchoServicePortType getPort() {
         return super.getPort(EchoServicePortType.class);
     }
 
     /**@return Messages history between the client and the server*/
-    public List<String> getChatHistory() {
+    public  @NotNull List<String> getChatHistory() {
         return chatHistory;
     }
 }
