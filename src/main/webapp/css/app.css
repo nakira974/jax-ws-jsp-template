@@ -3,62 +3,58 @@
 @import url("https://fonts.googleapis.com/css?family=Economica:400,700&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@3.2.1/css/jetbrains-mono.css");
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: #38352d;
   background-color: #f8f9fa;
+  color: #38352d;
+  font-family: "Poppins", sans-serif;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 h2 {
-  grid-row: 1; /* Position the heading in the first row */
-  font-size: 1.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  /* Position the heading in the first row */
+  grid-row: 1;
   margin-bottom: 1rem;
 }
 
 input[type=text] {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
   border: none;
-  font-family: "JetBrains Mono Light", monospace;
-  font-size: 1.1rem;
+  border-radius: 0.25rem;
   color: #38352d;
+  font-family: "JetBrains Mono Light", monospace;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  padding: 0.5rem;
 }
 
 button[type=submit] {
   background-color: #d35d39;
-  color: white;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
   border: none;
+  border-radius: 0.25rem;
+  color: white;
   cursor: pointer;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  padding: 0.5rem 1rem;
   transition: background-color 0.2s ease;
-}
-button[type=submit]:hover {
-  background-color: #c6502c;
 }
 
 form {
-  grid-row: 3; /* Position the message form in the third row */
+  align-items: center; /* Position the message form in the third row */
   display: grid;
-  grid-template-columns: auto 1fr auto; /* Define the columns for the message form */
-  grid-gap: 0.5rem;
-  align-items: center;
+  grid-gap: 0.5rem; /* Define the columns for the message form */
+  grid-row: 3;
+  grid-template-columns: auto 1fr auto;
 }
 
 label {
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 /* IDs */
@@ -70,14 +66,14 @@ label {
   overflow-y: auto;
 }
 #chatHistory li {
+  background-color: #f5f5f5;
+  border-radius: 0.25rem;
+  display: inline-block;
+  font-family: "Economica", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: bold;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  border-radius: 0.25rem;
-  background-color: #f5f5f5;
-  font-family: "Economica", sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  display: inline-block;
 }
 #chatHistory li:nth-child(even) {
   background-color: #e0e0e0;
@@ -87,8 +83,8 @@ label {
 }
 
 #chatHistory li {
+  background-color: #231815 !important;
   color: #f8f8f2;
-  background-color: #21222c !important;
 }
 #chatHistory li:nth-child(even) {
   background-color: #f8f9fa;
@@ -98,16 +94,15 @@ label {
 }
 
 #chatContainer {
+  background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 4rem);
-  background-color: #f8f9fa;
 }
 #chatContainer .animation-container {
-  position: relative;
+  height: clamp(50vh, 70vmin, 75vh);
   overflow: hidden;
-  height: 100%;
+  position: relative;
   width: 100%;
 }
 #chatContainer .animation-container:before {
@@ -115,21 +110,21 @@ label {
   display: none;
 }
 #chatContainer .animation-container.night:after {
+  animation: moon-animation 10s linear infinite;
+  background-color: #231815;
+  border-radius: 50%;
   content: "";
   display: block;
+  height: clamp(10vw, 20vmin, 100px);
+  left: max(-10vw, min(-20vmin, -100px));
   position: absolute;
   top: 50%;
-  left: -100px;
   transform: translateY(-50%);
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  animation: moon-animation 10s linear infinite;
-  background-color: #21222c;
+  width: clamp(10vw, 20vmin, 100px);
 }
 #chatContainer .animation-container.night #chatHistory li {
-  color: #f8f8f2;
-  background-color: #21222c !important;
+  color: #38352d;
+  background-color: #f8f9fa;
 }
 #chatContainer .animation-container.night #messageInput,
 #chatContainer .animation-container.night button[type=submit] {
@@ -137,17 +132,17 @@ label {
   color: #f8f8f2;
 }
 #chatContainer .animation-container:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: -100px;
-  transform: translateY(-50%);
-  width: 100px;
-  height: 100px;
+  animation-name: sun-animation;
   background-color: #d35d39;
   border-radius: 50%;
-  animation-name: sun-animation;
+  content: "";
+  display: block;
+  height: clamp(10vw, 20vmin, 100px);
+  left: max(-10vw, min(-20vmin, -100px));
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(10vw, 20vmin, 100px);
 }
 
 /* Keyframes */
@@ -169,7 +164,7 @@ label {
 }
 @keyframes sun-animation {
   from {
-    left: -100px;
+    left: max(-10vw, min(-20vmin, -100px));
     transform: translateY(-50%) rotate(180deg);
   }
   to {
@@ -179,22 +174,22 @@ label {
 }
 /* Classes */
 .animation-container {
-  position: relative;
-  height: 200px; /* change height to your desired height */
+  height: clamp(25vh, 40vmin, 50vh);
+  position: relative; /* change height to your desired height */
   width: 100%; /* add a fixed width */
 }
 
 .animation-container:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -100px; /* adjust the position of the sun/moon */
-  transform: translateY(-50%);
-  width: 100px;
-  height: 100px;
-  background-color: yellow; /* add a background color */
-  border-radius: 50%;
   animation-name: sun-animation;
+  background-color: #d35d39;
+  border-radius: 50%;
+  content: ""; /* adjust the position of the sun/moon */
+  height: clamp(10vw, 20vmin, 100px);
+  left: max(-10vw, min(-20vmin, -100px));
+  position: absolute;
+  top: 50%; /* add a background color */
+  transform: translateY(-50%);
+  width: clamp(10vw, 20vmin, 100px);
 }
 
 .animation-container.night:after {
@@ -206,45 +201,50 @@ label {
 }
 
 @media (min-width: 768px) {
-  /* Desktop Styles */
   #chatContainer {
-    height: auto;
-    max-width: 1024px;
-    margin: 0 auto;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+    height: auto;
+    margin: 0 auto;
+    max-width: 1024px;
     overflow: hidden;
   }
   #chatContainer .animation-container {
+    align-items: center;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 100%;
   }
   #chatContainer .animation-container:before {
+    background-image: radial-gradient(#f8f9fa 40%, transparent 60%);
     content: "";
+    height: 260%;
+    left: -130%;
     position: absolute;
     top: -130%;
-    left: -130%;
     width: 260%;
-    height: 260%;
-    background-image: radial-gradient(#f8f9fa 40%, transparent 60%);
     z-index: -1;
   }
   #chatContainer .animation-container:after {
     top: 10%;
-    left: -5%;
+    left: max(-5vw, min(-10vmin, -50px));
     animation-name: sun-animation-desktop;
   }
   @keyframes sun-animation-desktop {
     from {
-      left: 25%;
+      left: clamp(25vw, 40vmin, 200px);
     }
     to {
       left: 110%;
     }
+  }
+  #chatHistory li {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+  label {
+    font-size: clamp(0.8rem, 1vw, 1rem);
   }
 }
 
