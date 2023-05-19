@@ -1,61 +1,51 @@
+/* Global Styles */
+
+// Define fonts
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Economica:400,700&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@3.2.1/css/jetbrains-mono.css');
 
-// Variables
-$color-primary: #231815;
-$color-secondary: #d35d39;
-$color-background: #f8f9fa;
-$color-text: #38352d;
-
-// Global styles
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  background-color: $color-background;
-  color: $color-text;
+  background-color: #f8f9fa;
+  color: #38352d;
   font-family: 'Poppins', sans-serif;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.5rem; /* Position the heading in the first row */
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  /* Position the heading in the first row */
   grid-row: 1;
   margin-bottom: 1rem;
 }
 
-
 input[type="text"] {
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 0.25rem;
-  color: $color-text;
+  color: #38352d;
   font-family: 'JetBrains Mono Light', monospace;
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   padding: 0.5rem;
 }
 
 button[type="submit"] {
-  background-color: $color-secondary;
+  background-color: #d35d39;
   border: none;
   border-radius: 0.25rem;
   color: white;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   padding: 0.5rem 1rem;
   transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: darken($color-secondary, 5%);
-  }
 }
 
 form {
@@ -67,31 +57,44 @@ form {
 }
 
 label {
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
-/**IDS*/
+/* IDs */
+
 #chatHistory {
   grid-row: 2; /* Position the chat history in the second row */
   list-style: none;
   margin-top: 1rem;
-  max-height: 400px;
+  max-height: calc(100vh - (4rem + .5rem));
   overflow-y: auto;
+
+  li {
+    background-color: #f5f5f5;
+    border-radius: .25rem;
+    display:inline-block;
+    font-family: 'Economica', sans-serif;
+    font-size :clamp(1rem, 2vw, 1.2rem);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    padding: .5rem;
+
+    &:nth-child(even) {
+      background-color:#e0e0e0 ;
+    }
+
+    &:last-child {
+      margin-bottom:0 ;
+    }
+  }
 }
 
 #chatHistory li {
-  animation: fadein 0.5s;
-  background-color: #f5f5f5;
-  border-radius: 0.25rem;
-  display: inline-block;
-  font-family: 'Economica', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
+  background-color: #231815 !important;
+  color: #f8f8f2;
 
   &:nth-child(even) {
-    background-color: #e0e0e0;
+    background-color: #f8f9fa;
   }
 
   &:last-child {
@@ -99,19 +102,171 @@ label {
   }
 }
 
-// Chat styles
 #chatContainer {
-  background-color: white;
-  border-radius: 0.5rem; /* Define the rows for the chat container */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: 1rem;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  .animation-container {
+    height: clamp(50vh, 70vmin, 75vh);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    &:before {
+      content: "";
+      display: none;
+    }
+
+    &.night {
+      &:after {
+        animation: moon-animation 10s linear infinite;
+        background-color: #231815;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        height: clamp(10vw, 20vmin, 100px);
+        left: max(-10vw, min(-20vmin, -100px));
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: clamp(10vw, 20vmin, 100px);
+      }
+
+      #chatHistory li {
+        color: #38352d;
+        background-color: #f8f9fa;
+      }
+
+      #messageInput,
+      button[type="submit"] {
+        background-color: #ff79c6;
+        color: #f8f8f2;
+      }
+    }
+
+    &:after {
+      animation-name: sun-animation;
+      background-color: #d35d39;
+      border-radius: 50%;
+      content: "";
+      display: block;
+      height: clamp(10vw, 20vmin, 100px);
+      left: max(-10vw, min(-20vmin, -100px));
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(10vw, 20vmin, 100px);
+    }
+  }
 }
 
+/* Keyframes */
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from { opacity :0 ;}
+  to { opacity :1 ;}
 }
 
+@keyframes moon-animation {
+  from {
+    transform :translateX(-50%) rotate(0deg) ;
+  }
+
+  to {
+    transform :translateX(-50%) rotate(360deg) ;
+  }
+}
+
+@keyframes sun-animation {
+  from {
+    left: max(-10vw, min(-20vmin, -100px));
+    transform: translateY(-50%) rotate(180deg);
+  }
+  to {
+    left: 110%;
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* Classes */
+
+.animation-container {
+  height: clamp(25vh, 40vmin, 50vh);
+  position: relative; /* change height to your desired height */
+  width: 100%; /* add a fixed width */
+}
+
+.animation-container:after {
+  animation-name: sun-animation;
+  background-color: #d35d39;
+  border-radius: 50%;
+  content: ""; /* adjust the position of the sun/moon */
+  height: clamp(10vw, 20vmin, 100px);
+  left: max(-10vw, min(-20vmin, -100px));
+  position: absolute;
+  top: 50%; /* add a background color */
+  transform: translateY(-50%);
+  width: clamp(10vw, 20vmin, 100px);
+}
+
+.animation-container.night:after {
+  background-color: #ff79c6;
+}
+
+.animation-container.day:after {
+  background-color: #d35d39;
+}
+
+@media (min-width: 768px) {
+  #chatContainer {
+    border-radius :1rem;
+    box-shadow : 10px 10px 30px rgba(0,0,0,.1);
+    height: auto;
+    margin: 0 auto;
+    max-width: 1024px;
+    overflow :hidden;
+
+    .animation-container {
+      align-items:center;
+      border-top-left-radius :1rem;
+      border-top-right-radius :1rem;
+      display:flex;
+      justify-content:center;
+      width :100%;
+
+      &:before {
+        background-image : radial-gradient(#f8f9fa 40%, transparent 60%);
+        content:'';
+        height:260%;
+        left:-130%;
+        position:absolute;
+        top:-130%;
+        width:260%;
+        z-index :-1;
+      }
+
+      &:after {
+        top:10%;
+        left: max(-5vw, min(-10vmin, -50px));
+
+        animation-name:sun-animation-desktop ;
+
+        @keyframes sun-animation-desktop {
+          from { left :clamp(25vw, 40vmin, 200px); }
+          to { left :110% ;}
+        }
+      }
+    }
+  }
+
+  #chatHistory li {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  label {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+  }
+}
