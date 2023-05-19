@@ -10,9 +10,26 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/** Bean pattern for designing SOAP client/server interactions inside a JSF/Facelet
+/**
+ * This is an abstract base class for implementing SOAP client/server interactions inside a JSF/Facelet.
+ * It provides the necessary fields and constructor to build a service client, given a WSDL endpoint.
+ * In addition, it implements the {@link fr.aura.markandweb.gena_server.beans.xml.IXmlBean} interface.
+ *
+ * <p>Methods:</p>
+ * <ul>
+ *  <li>{@link #getWsdlUrl()} : Returns the WSDL fetch URL of this bean.</li>
+ *  <li>{@link #getServiceName()} : Returns the WSDL service name of this bean.</li>
+ *  <li>{@link #getService()} : Returns the WSDL service instance of this bean.</li>
+ *  <li>{@link #getServiceUrl()} : Returns the WSDL service URL of this bean.</li>
+ *  <li>{@link #getLocalPart()} : Returns the WSDL service local part of this bean.</li>
+ *  <li>{@link #XmlBeanBase(@NotNull String, @NotNull String)} : Constructor for creating a new instance with WSDL endpoint and local part.</li>
+ * </ul>
+ *
+ * @param <PortType> The type of the service port used by this bean.
  * @see fr.aura.markandweb.gena_server.beans.xml.IXmlBean
- * @author maxim */
+ * @since Creation date: 17/05/2023
+ * @author maxim
+ */
 public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>, Serializable {
 
     /**WSDL fetch URL*/
@@ -31,27 +48,27 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>, Seria
     private final String localPart;
 
     /**@return The bean WSDL fetch URL*/
-    public URL getWsdlUrl() {
+    public @NotNull URL getWsdlUrl() {
         return wsdlUrl;
     }
 
     /**@return The bean WSDL service name*/
-    public QName getServiceName() {
+    public @NotNull QName getServiceName() {
         return serviceName;
     }
 
     /**@return The bean WSDL service instance*/
-    public Service getService() {
+    public @NotNull Service getService() {
         return service;
     }
 
     /**@return The bean WSDL service URL*/
-    public String getServiceUrl() {
+    public @NotNull String getServiceUrl() {
         return serviceUrl;
     }
 
     /**@return The bean WSDL service local part*/
-    public String getLocalPart() {
+    public @NotNull String getLocalPart() {
         return localPart;
     }
 
@@ -89,7 +106,7 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>, Seria
     }
 
     @Override
-    public PortType getPort(Class<PortType> portTypeClass) {
+    public  @NotNull PortType getPort( @NotNull Class<PortType> portTypeClass) {
         return service.getPort(portTypeClass);
     }
 }

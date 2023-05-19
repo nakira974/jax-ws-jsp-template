@@ -1,5 +1,7 @@
 package fr.aura.markandweb.gena_server.beans.xml;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * JAX-WS clients generic implementation
  * @author maxim
