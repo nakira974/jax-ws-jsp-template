@@ -7,7 +7,7 @@ import org.apache.catalina.LifecycleException;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This class represents the main entry point of the GENA app backend.
+ * This class represents the main entry point of the GENA app backend in an embedded context like Docker or Kubernetes.
  * It initializes the CDI container and starts the Tomcat server on a specified port, handling requests from the client.
  *
  * <p>Methods:</p>
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  * @since Creation date: 17/05/2023
  * @author maxim
  */
-public class Program {
+public class Main {
 
     /**
      * The entry point of the application. Initializes the CDI container and starts the Tomcat server.

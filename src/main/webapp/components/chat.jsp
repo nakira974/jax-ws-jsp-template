@@ -1,3 +1,9 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: maxim
+  Date: 20/05/2023
+  Time: 12:35 am
+--%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
 
