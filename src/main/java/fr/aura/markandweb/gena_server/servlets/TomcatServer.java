@@ -11,6 +11,7 @@ import org.apache.catalina.startup.Tomcat;
 /**
  * This class is responsible for configuring and starting the embedded Tomcat server.
  * The server is started with the provided port and base directory.
+ * This class was essentially designed for the future <u><b>docker support incoming</b><u/>
  * <ul>
  *     <li>
  *         The <u>WEB_APP_DIR_LOCATION</u> property specifies the location of the web application directory to be deployed.
@@ -18,6 +19,8 @@ import org.apache.catalina.startup.Tomcat;
  *     The <li><u>CONTEXT_PATH</u> property specifies the context path that will be used for the web application.
  *     </li>
  * </ul>
+ * @since 19/05/2023
+ *
  */
 @ApplicationScoped
 public class TomcatServer extends HttpServlet {
