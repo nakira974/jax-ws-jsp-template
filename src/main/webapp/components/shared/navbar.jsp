@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <head>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Economica">
 </head>
 
 <div class="navbar-container">
@@ -23,15 +24,15 @@
         <li><a href="/home">Home</a></li>
         <li><a href="/profile">Profile</a>
             <ul class="submenu">
-                <li><a href="/my-robots"><i class="fa fa-robot"></i> My Robots</a></li>
-                <li><a href="/my-bots"><i class="fa fa-android"></i> My Bots</a></li>
+                <li><a href="/my-robots">My Robots</a></li>
+                <li><a href="/my-bots">My Bots</a></li>
             </ul>
         </li>
         <c:if test="${empty sessionScope.user}">
-            <li><a href="/login"><i class="fa fa-sign-in"></i> Login</a></li>
+            <li><a href="/login">Login</a></li>
         </c:if>
         <c:if test="${not empty sessionScope.user}">
-            <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href="/logout">Logout</a></li>
         </c:if>
     </ul>
 </div>
