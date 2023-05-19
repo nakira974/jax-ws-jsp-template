@@ -4,6 +4,7 @@ import fr.aura.markandweb.gena_server.servlets.TomcatServer;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 import org.apache.catalina.LifecycleException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents the main entry point of the GENA app backend.
@@ -24,7 +25,7 @@ public class Program {
      *
      * @param args The command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(@NotNull String[] args) {
         try (SeContainer container = SeContainerInitializer.newInstance().initialize()) {
             // Get the Tomcat server instance from the container
             TomcatServer server = container.select(TomcatServer.class).get();
@@ -48,7 +49,7 @@ public class Program {
      *
      * @param ex The exception that occurred during startup.
      */
-    private static void stopServerGracefully(LifecycleException ex) {
+    private static void stopServerGracefully(@NotNull LifecycleException ex) {
         System.err.println("stopServerGracefully has been called, fatal error!");
         System.err.println(ex.getMessage());
         try (SeContainer container = SeContainerInitializer.newInstance().initialize()) {
