@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Chat App</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
 </head>
@@ -31,32 +32,6 @@
     </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // Fetch the initial chat history
-        updateChatHistory();
-
-        // Submit the message form via AJAX
-        $('#messageForm').submit(function(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-            $.post($(this).attr('action'), $(this).serialize(), function() {
-                // Clear the input field and refresh the chat history
-                $('#message').val('');
-                updateChatHistory();
-            });
-        });
-
-        // Function to fetch the updated chat history and update the UI
-        function updateChatHistory() {
-            $.getJSON('/chat', function(chatHistory) {
-                var html = '';
-                $.each(chatHistory, function(index, msg) {
-                    html += '<li>' + msg + '</li>'
-                });
-                $('#chatHistory').html(html);
-            });
-        }
-    });
+<script type="module" src="${pageContext.request.contextPath}/ts/dist/chat.js">
 </script>
 </html>
