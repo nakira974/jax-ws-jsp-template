@@ -1,3 +1,9 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: maxim
+  Date: 20/05/2023
+  Time: 12:35 am
+--%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -5,14 +11,20 @@
 <head>
     <title>Chat App</title>
     <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/sun-moon.css">
 </head>
 <body>
+
+<div>
+    <jsp:include page="components/shared/navbar.jsp" />
+</div>
 
 <h1>Welcome to My Chat App!</h1>
 
 <div class="animation-container"></div>
-
-<jsp:include page="chat.jsp" />
+<div>
+    <jsp:include page="components/chat.jsp" />
+</div>
 
 <script type="text/javascript">
     function updateAnimation() {

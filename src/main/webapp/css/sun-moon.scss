@@ -1,0 +1,54 @@
+/* Classes */
+.animation-container {
+  height: clamp(25vh, 40vmin, 50vh);
+  position: relative; /* change height to your desired height */
+  width: 100%; /* add a fixed width */
+}
+
+.animation-container:after {
+  animation-name: sun-animation;
+  background-color: #d35d39;
+  border-radius: 50%;
+  content: ""; /* adjust the position of the sun/moon */
+  height: clamp(10vw, 20vmin, 100px);
+  left: max(-10vw, min(-20vmin, -100px));
+  position: absolute;
+  top: 50%; /* add a background color */
+  transform: translateY(-50%);
+  width: clamp(10vw, 20vmin, 100px);
+}
+
+.animation-container.night:after {
+  background-color: #ff79c6;
+}
+
+.animation-container.day:after {
+  background-color: #d35d39;
+}
+
+/* Keyframes */
+@keyframes fadein {
+  from { opacity :0 ;}
+  to { opacity :1 ;}
+}
+
+@keyframes moon-animation {
+  from {
+    transform :translateX(-50%) rotate(0deg) ;
+  }
+
+  to {
+    transform :translateX(-50%) rotate(360deg) ;
+  }
+}
+
+@keyframes sun-animation {
+  from {
+    left: max(-10vw, min(-20vmin, -100px));
+    transform: translateY(-50%) rotate(180deg);
+  }
+  to {
+    left: 110%;
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
