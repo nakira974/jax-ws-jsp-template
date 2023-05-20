@@ -11,6 +11,7 @@
 <head>
     <title>Chat App</title>
     <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/sun-moon.css">
 </head>
 <body>
 

@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>Chat App</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/app.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
 </head>
 <body>
     <%@ taglib prefix="c" uri="jakarta.tags.core" %>
