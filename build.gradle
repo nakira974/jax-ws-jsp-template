@@ -13,6 +13,9 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://clojars.org/repo/"
+    }
 }
 
 ext {
@@ -96,6 +99,9 @@ dependencies {
 
     //Google Implementations
     implementation("com.google.code.gson:gson:2.10.1")
+
+    //Capture file reader dependencies
+    implementation("jnetpcap:jnetpcap:1.5.r1457-1i")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
