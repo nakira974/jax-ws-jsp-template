@@ -9,6 +9,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/blinker.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat.css">
 </head>
 <body>
@@ -16,8 +17,7 @@
     <jsp:useBean id="echoBean" class="fr.aura.markandweb.gena_server.beans.EchoBean" scope="request"/>
 
     <div id="chatContainer">
-            <h2>Chat history:</h2>
-
+            <h2>Chat history :</h2>
             <ul id="chatHistory">
                 <c:forEach var="msg" items="${echoBean.chatHistory}">
                     <li>${msg}</li>
@@ -25,6 +25,7 @@
             </ul>
 
             <form id="messageForm" method="post" action="${pageContext.request.contextPath}/chat">
+                <div class="blincker"></div>
                 <label for="message">Type your message:</label>
                 <input type="text" id="message" name="message" value="${echoBean.echoedString}">
                 <button type="submit" id="submit">Send</button>

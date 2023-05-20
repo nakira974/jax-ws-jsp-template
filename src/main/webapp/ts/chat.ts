@@ -1,4 +1,9 @@
 $(document).ready(() => {
+
+    const messageInput = document.getElementById('message') as HTMLInputElement;
+    const submit = document.getElementById('submit') as HTMLInputElement;
+    const blincker = document.querySelector('.blincker') as HTMLElement;
+
     // Declare updateChatHistory function
     const updateChatHistory = () => {
         $.getJSON('/chat', (chatHistory: any) => {
@@ -24,5 +29,19 @@ $(document).ready(() => {
                 updateChatHistory();
             });
         }
+    });
+
+    messageInput.addEventListener('keyup', () => {
+        if (messageInput.value.trim() !== '') {
+            blincker.style.color = "darkgreen"
+            blincker.classList.add('blink');
+        }
+    });
+
+    submit.addEventListener('click', () => {
+        blincker.classList.remove('blink');
+        setTimeout(() => {
+            blincker.classList.remove('blink');
+        }, 1000); // Remove the class after 1 second
     });
 });
