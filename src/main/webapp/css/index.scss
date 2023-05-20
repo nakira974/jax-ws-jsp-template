@@ -1,0 +1,38 @@
+/* Global Styles */
+
+// Define fonts
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Economica:400,700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@3.2.1/css/jetbrains-mono.css');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #38352d;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  /* Position the heading in the first row */
+  grid-row: 1;
+  margin-bottom: 1rem;
+}
+
+/* Keyframes */
+
+
+
+/* Classes */
+
+
+

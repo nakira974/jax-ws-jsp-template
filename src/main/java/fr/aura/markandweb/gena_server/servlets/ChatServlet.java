@@ -74,7 +74,7 @@ public class ChatServlet extends HttpServlet {
             echoBean.echo(message);
         }
         request.setAttribute("chatHistory", echoBean.getChatHistory());
-        request.getRequestDispatcher("chat.jsp").forward(request, response);
+        request.getRequestDispatcher("components/chat.jsp").forward(request, response);
 
     }
 
