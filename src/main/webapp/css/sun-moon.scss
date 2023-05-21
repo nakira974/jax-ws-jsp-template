@@ -1,54 +1,85 @@
-/* Classes */
-.animation-container {
-  height: clamp(25vh, 40vmin, 50vh);
-  position: relative; /* change height to your desired height */
-  width: 100%; /* add a fixed width */
-}
+/*
+Error: Incompatible units: 'px' and 'vmin'.
+        on line 14 of .\sun-moon.scss
 
-.animation-container:after {
-  animation-name: sun-animation;
-  background-color: #d35d39;
-  border-radius: 50%;
-  content: ""; /* adjust the position of the sun/moon */
-  height: clamp(10vw, 20vmin, 100px);
-  left: max(-10vw, min(-20vmin, -100px));
-  position: absolute;
-  top: 50%; /* add a background color */
-  transform: translateY(-50%);
-  width: clamp(10vw, 20vmin, 100px);
-}
+9:   animation-name: sun-animation;
+10:   background-color: #d35d39;
+11:   border-radius: 50%;
+12:   content: ""; /* adjust the position of the sun/moon *\/
+13:   height: clamp(10vw, 20vmin, 100px);
+14:   left: max(-10vw, min(-20vmin, -100px));
+15:   position: absolute;
+16:   top: 50%; /* add a background color *\/
+17:   transform: translateY(-50%);
+18:   width: clamp(10vw, 20vmin, 100px);
+19: }
 
-.animation-container.night:after {
-  background-color: #ff79c6;
-}
-
-.animation-container.day:after {
-  background-color: #d35d39;
-}
-
-/* Keyframes */
-@keyframes fadein {
-  from { opacity :0 ;}
-  to { opacity :1 ;}
-}
-
-@keyframes moon-animation {
-  from {
-    transform :translateX(-50%) rotate(0deg) ;
-  }
-
-  to {
-    transform :translateX(-50%) rotate(360deg) ;
-  }
-}
-
-@keyframes sun-animation {
-  from {
-    left: max(-10vw, min(-20vmin, -100px));
-    transform: translateY(-50%) rotate(180deg);
-  }
-  to {
-    left: 110%;
-    transform: translateY(-50%) rotate(360deg);
-  }
-}
+Backtrace:
+.\sun-moon.scss:14
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/value/number.rb:450:in `coercion_factor'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/value/number.rb:371:in `coerce'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/value/number.rb:431:in `operate'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/value/number.rb:257:in `lt'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/functions.rb:1929:in `block in min'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/functions.rb:1929:in `each'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/functions.rb:1929:in `inject'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/functions.rb:1929:in `min'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:151:in `block in _perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:108:in `block in with_function'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:108:in `with_function'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:149:in `_perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:182:in `perform_arg'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `block in _perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `each'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `each_with_index'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `each'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `map'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/funcall.rb:129:in `_perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:398:in `visit_prop'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `block (2 levels) in visit_rule'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `map'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `block in visit_rule'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:438:in `visit_rule'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:10:in `visit'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:387:in `run'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:63:in `process_result'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
+C:/Program Files/Ruby/3.4.13/gems/sass-3.7.4/bin/sass:13:in `<top (required)>'
+C:/Program Files/Ruby/3.4.13/bin/sass:32:in `load'
+C:/Program Files/Ruby/3.4.13/bin/sass:32:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Incompatible units: 'px' and 'vmin'.\A         on line 14 of .\sun-moon.scss\A \A 9:   animation-name: sun-animation;\A 10:   background-color: #d35d39;\A 11:   border-radius: 50%;\A 12:   content: \"\"; /* adjust the position of the sun/moon */\A 13:   height: clamp(10vw, 20vmin, 100px);\A 14:   left: max(-10vw, min(-20vmin, -100px));\A 15:   position: absolute;\A 16:   top: 50%; /* add a background color */\A 17:   transform: translateY(-50%);\A 18:   width: clamp(10vw, 20vmin, 100px);\A 19: }"; }
