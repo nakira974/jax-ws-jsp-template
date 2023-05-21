@@ -19,17 +19,28 @@
 
     -->
     <servlet>
-        <servlet-name>helloServlet</servlet-name>
-        <servlet-class>fr.aura.markandweb.gena_server.servlets.HelloServlet</servlet-class>
+        <servlet-name>JAX-WS Servlet</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <init-param>
-            <param-name>jakarta.xml.ws.endpoint.address</param-name>
-            <param-value>/hello-servlet</param-value>
+            <param-name>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</param-name>
+            <param-value>TRUE</param-value>
         </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>helloServlet</servlet-name>
-        <url-pattern>/hello-servlet</url-pattern>
+        <servlet-name>JAX-WS Servlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configure the FileTransferService endpoint -->
+    <servlet>
+        <servlet-name>EchoMessageServlet</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EchoMessageServlet</servlet-name>
+        <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 
     <resource-env-ref>
