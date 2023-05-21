@@ -10,20 +10,20 @@
 <html>
 <head>
     <title>Chat App</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sun-moon.css">
 </head>
 <body>
 
 <div>
-    <jsp:include page="components/shared/navbar.jsp" />
+    <jsp:include page="../components/shared/navbar.jsp" />
 </div>
 
 <h1>Welcome to My Chat App!</h1>
 
 <div class="animation-container"></div>
 <div>
-    <jsp:include page="components/chat.jsp" />
+    <jsp:include page="../components/chat.jsp" />
 </div>
 
 <script type="text/javascript">
