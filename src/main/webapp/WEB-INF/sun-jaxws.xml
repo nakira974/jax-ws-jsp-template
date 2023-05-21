@@ -3,9 +3,11 @@
            xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
 
     <!-- Configure the FileTransferService endpoint -->
+    <!--
     <endpoint
             name="EchoServicePort"
             implementation="fr.aura.markandweb.gena_server.servlets.soap.EchoMessageServlet"
             url-pattern="/services/echo"
             binding="http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/"/>
+       -->
 </endpoints>
