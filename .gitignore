@@ -49,3 +49,6 @@ bin/
 /src/main/resources/application.properties
 /src/main/resources/dev.application.properties
 /src/main/resources/prod.application.properties
+/src/main/resources/docker-ressources/Tomcat/server.xml
+/certs/keystore.p12
+/tomcat/server.xml

@@ -17,17 +17,18 @@ services:
   tomcat:
     container_name: local_tomcat
     image: tomcat:11.0.0-M6-jdk17
-    restart: unless-stopped
+    restart: always
     environment:
       TZ: Europe/Paris
       TOMCAT_USERNAME: maxime
-      TOMCAT_PASSWORD: Soleil2020!
+      TOMCAT_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
     ports:
-      - "9090:80"
+      - "9090:8080"
     networks:
       - local_tomcat_services
     volumes:
-      - ./path/to/your/server.xml:/usr/local/tomcat/conf/server.xml
+        - ./certs/server.xml:/usr/local/tomcat/conf/server.xml
+        - ./certs:/usr/local/tomcat/certs
     depends_on:
       - postgres
 
