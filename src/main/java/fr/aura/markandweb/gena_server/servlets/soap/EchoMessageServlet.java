@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 public class EchoMessageServlet extends HttpServlet implements Provider<SOAPMessage> {
 
     /**The WSDL scheme endpoint*/
-    public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/echo?wsdl";
+    public static final @NotNull String WSDL_ENDPOINT ="http://localhost:8083/home/echo?wsdl";
 
     /**The namespace URI used in the SOAP message*/
-    public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/echo";
+    public static final @NotNull String NAMESPACE_URI = "http://localhost:8083/home/echo";
 
     /**The local part used in the SOAP message*/
     public static final @NotNull String LOCAL_PART = "EchoService";
