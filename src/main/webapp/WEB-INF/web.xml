@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <display-name>Home</display-name>
+    <display-name>Home</display-name>
+    <context-param>
+        <param-name>env</param-name>
+        <param-value>dev</param-value>
+    </context-param>
     <!--
 
     <servlet>

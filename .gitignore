@@ -46,3 +46,6 @@ bin/
 /src/main/webapp/css/chat.css.map
 /src/main/webapp/css/app.css
 /src/main/webapp/css/app.css.map
+/src/main/resources/application.properties
+/src/main/resources/dev.application.properties
+/src/main/resources/prod.application.properties
