@@ -1,0 +1,115 @@
+/* Import JetBrains Mono font */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+/* Define colors */
+$red: #de5833;
+$background: #f7f7f7;
+$text: #333;
+$hover: #e5e5e5;
+
+/* Set box-sizing to border-box globally */
+* {
+  box-sizing: border-box;
+}
+
+/* Set universal padding and margin to 0 */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Apply Jetbrains Mono font to all elements */
+body {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Set background color to container */
+#chatContainer {
+  background-color: $background;
+}
+
+/* Style chat history */
+#chatHistory {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  height: 400px;
+
+  li {
+    padding: 10px;
+    border-bottom: 1px solid $text;
+    transition: all 0.2s ease-in-out;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $hover;
+    }
+  }
+}
+
+/* Style message form */
+#messageForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background;
+  padding: 20px;
+
+  label {
+    display: block;
+    margin-right: 10px;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: $text;
+    color: $background;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px $red;
+    }
+  }
+
+  button[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: $red;
+    color: $background;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: darken($red, 10%);
+    }
+  }
+}
+
+/* Define animation for new messages */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animate new messages */
+li.chat-message {
+  animation: slide-up 0.2s ease-in-out;
+}

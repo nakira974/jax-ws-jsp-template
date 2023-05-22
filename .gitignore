@@ -40,3 +40,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/src/main/webapp/css/sun-moon.css
+/src/main/webapp/css/sun-moon.css.map
+/src/main/webapp/css/chat.css
+/src/main/webapp/css/chat.css.map
+/src/main/webapp/css/app.css
+/src/main/webapp/css/app.css.map

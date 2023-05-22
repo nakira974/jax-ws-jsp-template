@@ -1,0 +1,35 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "jax-ws-template's frontend scripts",
+  "main": "index.ts",
+  "scripts": {
+    "test": "build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakira974/jax-ws-jakarta-template.git"
+  },
+  "keywords": [
+    "jakartaee",
+    "jax-ws",
+    "soap",
+    "jstl",
+    "jsp"
+  ],
+  "author": "nakira974",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nakira974/jax-ws-jakarta-template/issues"
+  },
+  "homepage": "https://github.com/nakira974/jax-ws-jakarta-template#readme",
+  "dependencies": {
+    "jquery": "^3.7.0",
+    "xml2js": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.16",
+    "@types/node": "^20.2.1",
+    "@types/xml2js": "^0.4.11"
+  }
+}

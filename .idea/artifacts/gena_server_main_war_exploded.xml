@@ -114,6 +114,10 @@
           <element id="library" level="project" name="Gradle: org.apache.myfaces.core:myfaces-api:4.0.0" />
           <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jstl-1.2-sources.jar" />
           <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.servlet:jakarta.servlet-api:6.0.0" />
+          <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.10.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="gena_server.main/web/Web Gradle : gena_server-1.0-SNAPSHOT.war" />

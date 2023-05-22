@@ -1,0 +1,52 @@
+/* Add nested effect */
+.blink {
+  animation: blink 1s infinite linear;
+}
+/* Main blinker class */
+.blincker {
+  width: 50px;
+  height: 30px;
+  background-color: orange;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* Add nested ovals */
+.blincker:after,
+.blincker:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+}
+
+.blincker:before {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+}
+
+/* Add light effect */
+.blincker::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+  border-radius: 50%;
+  opacity: 0;
+  animation: blink 1s infinite linear;
+}
+
+/* Define animation */
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
