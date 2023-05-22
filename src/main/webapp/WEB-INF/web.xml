@@ -3,7 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
+    <display-name>Home</display-name>
+    <display-name>Home</display-name>
+    <context-param>
+        <param-name>env</param-name>
+        <param-value>dev</param-value>
+    </context-param>
     <!--
 
     <servlet>
@@ -18,19 +23,28 @@
     </servlet-mapping>
 
     -->
+    <welcome-file-list>
+        <welcome-file>/home/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/redirect.jsp</location>
+    </error-page>
     <servlet>
-        <servlet-name>helloServlet</servlet-name>
-        <servlet-class>fr.aura.markandweb.gena_server.servlets.HelloServlet</servlet-class>
+        <servlet-name>JAX-WS Servlet</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <init-param>
-            <param-name>jakarta.xml.ws.endpoint.address</param-name>
-            <param-value>/hello-servlet</param-value>
+            <param-name>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</param-name>
+            <param-value>TRUE</param-value>
         </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>helloServlet</servlet-name>
-        <url-pattern>/hello-servlet</url-pattern>
+        <servlet-name>JAX-WS Servlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
+
 
     <resource-env-ref>
         <description>WebService Context</description>

@@ -2,12 +2,12 @@
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             xmlns:tns="http://localhost:8083/echo"
-             targetNamespace="http://localhost:8083/echo"
+             xmlns:tns="http://localhost:8083/home/echo"
+             targetNamespace="http://localhost:8083/home/echo"
              name="EchoService">
 
     <types>
-        <xsd:schema targetNamespace="http://localhost:8083/echo">
+        <xsd:schema targetNamespace="http://localhost:8083/home/echo">
             <xsd:element name="echoRequest" type="xsd:string"/>
             <xsd:element name="echoResponse" type="xsd:string"/>
         </xsd:schema>
@@ -43,7 +43,7 @@
 
     <service name="EchoService">
         <port name="EchoServicePort" binding="tns:EchoServiceSoapBinding">
-            <soap:address location="http://localhost:8083/echo"/>
+            <soap:address location="http://localhost:8083/home/echo"/>
         </port>
     </service>
 

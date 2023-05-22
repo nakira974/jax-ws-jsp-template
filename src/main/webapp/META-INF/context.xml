@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/">
-
+<Context path="/home">
+    <Resource name="jdbc/config" auth="Container" type="java.util.Properties"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="org.h2.Driver"
+              url="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"
+              username=""
+              password=""
+              connectionProperties="${env}.application.properties"/>
 </Context>

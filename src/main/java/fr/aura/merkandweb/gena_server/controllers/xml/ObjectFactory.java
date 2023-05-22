@@ -24,8 +24,8 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private static final QName _EchoRequest_QNAME = new QName("http://localhost:8083/echo", "echoRequest");
-    private static final QName _EchoResponse_QNAME = new QName("http://localhost:8083/echo", "echoResponse");
+    private static final QName _EchoRequest_QNAME = new QName("http://localhost:8083/home/echo", "echoRequest");
+    private static final QName _EchoResponse_QNAME = new QName("http://localhost:8083/home/echo", "echoResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: fr.aura.merkandweb.gena_server.controllers.xml
@@ -42,7 +42,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://localhost:8083/echo", name = "echoRequest")
+    @XmlElementDecl(namespace = "http://localhost:8083/home/echo", name = "echoRequest")
     public JAXBElement<String> createEchoRequest(String value) {
         return new JAXBElement<>(_EchoRequest_QNAME, String.class, null, value);
     }
@@ -55,7 +55,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://localhost:8083/echo", name = "echoResponse")
+    @XmlElementDecl(namespace = "http://localhost:8083/home/echo", name = "echoResponse")
     public JAXBElement<String> createEchoResponse(String value) {
         return new JAXBElement<>(_EchoResponse_QNAME, String.class, null, value);
     }
