@@ -52,3 +52,5 @@ bin/
 /src/main/resources/docker-ressources/Tomcat/server.xml
 /certs/keystore.p12
 /tomcat/server.xml
+/certs/tomcat_cert.jks
+/tomcat/web.xml

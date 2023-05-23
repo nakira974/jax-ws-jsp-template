@@ -11,8 +11,6 @@ services:
       POSTGRES_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
     networks:
       - local_tomcat_services
-    ports:
-      - "6054:5432"
 
   tomcat:
     container_name: local_tomcat
@@ -20,15 +18,26 @@ services:
     restart: always
     environment:
       TZ: Europe/Paris
-      TOMCAT_USERNAME: maxime
-      TOMCAT_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
+      TOMCAT_USERNAME: dev_account_5456456
+      TOMCAT_PASSWORD: dev_password_165456465465446546àèçàç(-çè-à)
+      CATALINA_OPTS:  ''
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: tomcat
+      DB_USER: dev_account_5456456
+      DB_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
+
     ports:
-      - "9090:8080"
+      - "9090:9090"
+      - "9433:9433"
     networks:
       - local_tomcat_services
     volumes:
-        - ./certs/server.xml:/usr/local/tomcat/conf/server.xml
-        - ./certs:/usr/local/tomcat/certs
+      #- ./myapp.war:/usr/local/tomcat/webapps
+        - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+        - ./tomcat/web.xml:/usr/local/tomcat/conf/web.xml
+        - ./certs:/usr/local/tomcat/conf
+        - ./lib/postgresql-42.6.0.jar:/usr/local/tomcat/lib/postgresql-42.6.0.jar
     depends_on:
       - postgres
 
