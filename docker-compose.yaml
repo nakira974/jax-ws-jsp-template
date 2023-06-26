@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  postgres:
+    container_name: local_tomcat_postgres
+    image: postgres:13.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tomcat
+      POSTGRES_USER: dev_account_5456456
+      POSTGRES_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
+    networks:
+      - local_tomcat_services
+
+  tomcat:
+    container_name: local_tomcat
+    image: tomcat:11.0.0-M6-jdk17
+    restart: always
+    environment:
+      TZ: Europe/Paris
+      TOMCAT_USERNAME: dev_account_5456456
+      TOMCAT_PASSWORD: dev_password_165456465465446546àèçàç(-çè-à)
+      CATALINA_OPTS:  ''
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: tomcat
+      DB_USER: dev_account_5456456
+      DB_PASSWORD: dev_password_16545646546546546àèçàç(-çè-à)
+
+    ports:
+      - "9090:9090"
+      - "9433:9433"
+    networks:
+      - local_tomcat_services
+    volumes:
+      #- ./myapp.war:/usr/local/tomcat/webapps
+        - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+        - ./tomcat/web.xml:/usr/local/tomcat/conf/web.xml
+        - ./certs:/usr/local/tomcat/conf
+        - ./lib/postgresql-42.6.0.jar:/usr/local/tomcat/lib/postgresql-42.6.0.jar
+    depends_on:
+      - postgres
+
+networks:
+  local_tomcat_services:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

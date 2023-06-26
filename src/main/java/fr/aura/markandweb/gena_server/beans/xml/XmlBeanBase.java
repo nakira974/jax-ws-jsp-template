@@ -74,7 +74,7 @@ public abstract class XmlBeanBase<PortType> implements IXmlBean<PortType>, Seria
 
 
     /**JAX-WS Client bean constructor
-     * @param wsdlUrl WSDL fetch url : <p><b><a href="http://localhost:8083/home/echo?wsd">http://localhost:8083/home/echo?wsd</a></b></p>
+     * @param wsdlUrl WSDL fetch url : <p><b><a href="https://localhost:8483/home/echo?wsd">https://localhost:8483/home/echo?wsd</a></b></p>
      * @param localPart WSDL service local part
      * @since 17/05/2023*/
     protected XmlBeanBase(@NotNull String wsdlUrl, @NotNull String localPart) throws MalformedURLException, WebServiceException {
