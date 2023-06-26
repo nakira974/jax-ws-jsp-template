@@ -62,12 +62,7 @@ public class ChatServlet extends HttpServlet {
      */
     @Override
     protected void doPost(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws ServletException, IOException {
-        List<String> chatHistory = echoBean.getChatHistory();
-        String json = new Gson().toJson(chatHistory);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        out.write(json);
+        getChatHistoryInjected(response);
 
         String message = request.getParameter("message");
         if (message != null) {
@@ -76,6 +71,23 @@ public class ChatServlet extends HttpServlet {
         request.setAttribute("chatHistory", echoBean.getChatHistory());
         request.getRequestDispatcher("components/chat.jsp").forward(request, response);
 
+    }
+
+    private void getChatHistoryInjected(@NotNull HttpServletResponse response) throws IOException {
+        List<String> chatHistory = echoBean.getChatHistory();
+        String json = "";
+        try{
+            final String tempJson = new Gson().toJson(chatHistory);
+            if(tempJson != null && !tempJson.equals("")){
+                json = tempJson;
+            }
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(json);
     }
 
     /**
@@ -89,11 +101,6 @@ public class ChatServlet extends HttpServlet {
     @Override
     protected void doGet(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws ServletException, IOException {
         // Send the chat history as a JSON response
-        List<String> chatHistory = echoBean.getChatHistory();
-        String json = new Gson().toJson(chatHistory);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        out.write(json);
+        getChatHistoryInjected(response);
     }
 }

@@ -6,7 +6,7 @@ $(document).ready(() => {
 
     // Declare updateChatHistory function
     const updateChatHistory = () => {
-        $.getJSON('/chat', (chatHistory: any) => {
+        $.getJSON('/home/chat', (chatHistory: any) => {
             let html = '';
             $.each(chatHistory, (index: any, msg: string) => {
                 html += '<li>' + msg + '</li>';
